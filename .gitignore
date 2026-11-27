@@ -1,0 +1,26 @@
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Editores
+.idea/
+.vscode/*
+!.vscode/extensions.json
+*.iml
+
+# Segredos
+.env
+.env.*
+!.env.example
+
+# Front
+node_modules/
+frontend/dist/
+frontend/coverage/
+
+# Back
+backend/target/
+
+# Moodboard: o HTML montado é gerado por tools/build.py
+docs/moodboard/hollow-page-pharloom.html
+docs/moodboard/tools/__pycache__/

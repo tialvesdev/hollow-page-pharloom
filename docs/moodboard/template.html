@@ -1,0 +1,1078 @@
+<meta charset="utf-8">
+<title>Hollow Page Pharloom</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Alegreya+Sans:wght@400;500;700&display=swap">
+<style>
+/* Layout: página única escura; abertura como tela de título, depois cenários, paleta, tipos, ornamentos, componentes e o mapa navegável com mini feed. */
+:root{
+  --breu:#0C0706;      /* fundo: preto avermelhado da tela de perfis */
+  --fuligem:#171010;   /* superfícies */
+  --ferro:#261A18;     /* superfície elevada */
+  --vinho:#4A2220;     /* brilho do fundo, hover */
+  --carmim:#C8323A;    /* capa da Hornet: alfinete, ativo, reação */
+  --carmim-claro:#E8636A;
+  --brasa:#E8873C;     /* forja: fagulhas, destaque quente */
+  --ambar:#F2AA57;
+  --musgo-fundo:#102817;
+  --musgo:#376742;
+  --broto:#8CC06F;     /* musgo: sucesso, regiões verdes */
+  --osso:#F3EEE8;      /* ornamento e texto */
+  --nevoa:#BFB2AC;     /* texto de apoio */
+  --linha:rgba(243,238,232,.18);
+  --f-titulo:"Cinzel","Trajan Pro",Georgia,serif;
+  --f-lore:"Cormorant Garamond",Garamond,Georgia,serif;
+  --f-ui:"Alegreya Sans",system-ui,sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--breu);color:var(--osso);font-family:var(--f-ui);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.orn{fill:currentColor;display:block}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.wrap{max-width:1200px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+section{padding-block:88px 24px}
+h1,h2,h3{font-family:var(--f-titulo);font-weight:600;margin:0;text-wrap:balance}
+h2{font-size:clamp(28px,4vw,40px);letter-spacing:.06em;line-height:1.15}
+h3{font-size:20px;letter-spacing:.06em;line-height:1.25}
+p{margin:0}
+.cab{display:grid;gap:14px;margin-bottom:36px;max-width:62ch}
+.cab p{color:var(--nevoa)}
+.carretel{color:var(--osso);width:min(420px,100%);height:28px}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--ambar);outline-offset:3px}
+
+/* ABERTURA */
+.abertura{position:relative;overflow:hidden;text-align:center;padding-block:72px 64px;
+  background:radial-gradient(120% 80% at 50% 120%,#6a2a1c 0%,#2a1210 38%,var(--breu) 72%)}
+#brasas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.abertura .wrap{position:relative;display:grid;justify-items:center;gap:6px}
+.abertura .moldura-topo{width:min(380px,80vw);height:auto;color:var(--osso)}
+.abertura .moldura-base{width:min(380px,80vw);height:auto;color:var(--osso);margin-top:-6px}
+.marca-1{font-family:var(--f-titulo);font-weight:600;font-size:clamp(18px,2.6vw,26px);letter-spacing:.32em}
+.marca-2{font-family:var(--f-titulo);font-weight:700;font-size:clamp(52px,10vw,112px);line-height:.95;letter-spacing:.02em}
+.tese{font-family:var(--f-lore);font-size:clamp(20px,2.4vw,24px);font-style:italic;color:var(--nevoa);max-width:34ch;margin-top:18px}
+.menu{list-style:none;margin:28px 0 0;padding:0;display:grid;gap:6px;justify-items:center}
+.menu button{background:none;border:0;cursor:pointer;display:inline-flex;align-items:center;gap:14px;padding:6px 8px;
+  font-family:var(--f-titulo);font-size:20px;letter-spacing:.08em;color:var(--nevoa)}
+.menu .seta{width:16px;height:28px;opacity:0;transition:opacity .2s,transform .2s;color:var(--osso)}
+.menu .seta.d{transform:scaleX(-1) translateX(6px)}
+.menu .seta.e{transform:translateX(6px)}
+.menu button:hover,.menu button:focus-visible,.menu button[aria-current="true"]{color:var(--osso)}
+.menu button:hover .seta,.menu button:focus-visible .seta,.menu button[aria-current="true"] .seta{opacity:1;transform:none}
+.menu button:hover .seta.d,.menu button:focus-visible .seta.d,.menu button[aria-current="true"] .seta.d{transform:scaleX(-1)}
+
+/* CENÁRIOS */
+.refs{display:grid;grid-template-columns:repeat(6,1fr);gap:16px}
+.ref{margin:0;display:grid;gap:10px;grid-column:span 2;min-width:0}
+.ref.g{grid-column:span 4;grid-row:span 2}
+.ref.m{grid-column:span 3}
+.ref img{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:4px;display:block;background:var(--fuligem)}
+.ref.g img{aspect-ratio:auto;height:calc(100% - 64px);min-height:240px}
+.ref figcaption{font-size:15px;color:var(--nevoa);line-height:1.45}
+.ref figcaption b{color:var(--osso);font-weight:700;display:block;font-size:13px;letter-spacing:.14em;text-transform:uppercase}
+
+/* PALETA */
+.familias{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:28px}
+.familia h3{margin-bottom:14px}
+.familia > p{color:var(--nevoa);font-size:15px;margin-bottom:16px}
+.amostras{display:grid;gap:8px}
+.amostra{display:grid;grid-template-columns:56px 1fr auto;align-items:center;gap:14px;padding:6px;border-radius:6px;background:var(--fuligem)}
+.amostra i{display:block;height:44px;border-radius:4px;box-shadow:inset 0 0 0 1px rgba(243,238,232,.08)}
+.amostra span{font-weight:700;font-size:15px}
+.amostra small{display:block;font-weight:400;color:var(--nevoa);font-size:13px}
+.amostra code{font-family:var(--f-ui);font-size:13px;color:var(--nevoa);font-variant-numeric:tabular-nums;letter-spacing:.04em}
+.proporcao{display:flex;height:22px;border-radius:4px;overflow:hidden;margin-top:28px}
+.proporcao i{display:block}
+.legenda-prop{display:flex;justify-content:space-between;font-size:13px;color:var(--nevoa);margin-top:8px;gap:12px;flex-wrap:wrap}
+
+/* TIPOGRAFIA */
+.tipos{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
+.tipo{background:var(--fuligem);border-radius:6px;padding:28px;display:grid;gap:14px;align-content:start;min-width:0}
+.tipo .rot{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--nevoa);font-weight:700}
+.esp-titulo{font-family:var(--f-titulo);font-size:44px;font-weight:600;letter-spacing:.04em;line-height:1.05}
+.esp-lore{font-family:var(--f-lore);font-size:24px;line-height:1.35}
+.esp-ui{font-family:var(--f-ui);font-size:17px}
+.escala{display:grid;gap:4px;color:var(--nevoa);font-size:14px;font-variant-numeric:tabular-nums}
+
+/* ORNAMENTOS */
+.ornamentos{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.orn-card{background:var(--fuligem);border-radius:6px;padding:20px;display:grid;gap:12px;align-content:space-between;min-height:220px}
+.orn-card .palco{display:grid;place-items:center;min-height:120px;color:var(--osso)}
+.orn-card h3{font-size:16px}
+.orn-card p{font-size:15px;color:var(--nevoa)}
+
+/* COMPONENTES */
+.comp{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px;align-items:start}
+.bloco{display:grid;gap:18px;min-width:0}
+.bloco > .rot{font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--nevoa);font-weight:700}
+
+.moldura{position:relative;padding:30px 30px 26px}
+.moldura::before{content:"";position:absolute;inset:7px 7px 5px 7px;border:1.5px solid var(--osso);pointer-events:none;opacity:.85}
+.moldura > .c{position:absolute;width:74px;height:60px;color:var(--osso);pointer-events:none}
+.moldura > .c.tl{top:0;left:0}
+.moldura > .c.tr{top:0;right:0}
+.moldura > .c.bl{bottom:0;left:0}
+.moldura > .c.br{bottom:0;right:0}
+.moldura.aberta::before{border:0;background:
+  linear-gradient(var(--osso),var(--osso)) 16px 16px/55% 1.5px no-repeat,
+  linear-gradient(var(--osso),var(--osso)) 16px 16px/1.5px 70% no-repeat,
+  linear-gradient(var(--osso),var(--osso)) right 0 bottom 0/45% 1.5px no-repeat,
+  linear-gradient(var(--osso),var(--osso)) right 0 bottom 0/1.5px 40% no-repeat}
+
+.painel{background:rgba(12,7,6,.82);backdrop-filter:blur(6px)}
+.painel h3{font-size:22px}
+.painel p{color:var(--nevoa)}
+
+.campo{display:grid;gap:8px}
+.campo label{font-size:13px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:var(--nevoa)}
+.caixa{position:relative}
+.caixa input,.caixa textarea{width:100%;background:rgba(243,238,232,.04);border:0;border-bottom:1.5px solid var(--linha);
+  color:var(--osso);font:inherit;padding:12px 16px;border-radius:2px 2px 0 0;outline:none;resize:vertical}
+.caixa input::placeholder,.caixa textarea::placeholder{color:#8f817b}
+.caixa .k{position:absolute;width:22px;height:22px;color:var(--osso);opacity:0;transition:opacity .2s,transform .2s;pointer-events:none}
+.caixa .k.a{top:-9px;left:-9px;transform:translate(4px,4px)}
+.caixa .k.b{bottom:-9px;right:-9px;transform:translate(-4px,-4px)}
+.caixa:focus-within input,.caixa:focus-within textarea{border-bottom-color:var(--osso);background:rgba(243,238,232,.07)}
+.caixa:focus-within .k,.caixa.foco .k{opacity:1;transform:none}
+.caixa.foco input{border-bottom-color:var(--osso);background:rgba(243,238,232,.07)}
+.caixa.erro input{border-bottom-color:var(--carmim-claro)}
+.caixa.erro .k{opacity:1;transform:none;color:var(--carmim-claro)}
+.msg-erro{font-size:15px;color:var(--carmim-claro)}
+
+.acoes{display:flex;flex-wrap:wrap;gap:10px 24px;align-items:center}
+.btn{display:inline-flex;align-items:center;gap:12px;background:none;border:0;cursor:pointer;padding:8px 4px;
+  font-family:var(--f-titulo);font-size:18px;letter-spacing:.08em;color:var(--osso)}
+.btn .seta{width:13px;height:24px}
+.btn .seta.d{transform:scaleX(-1)}
+.btn.sec{color:var(--nevoa)}
+.btn.sec .seta{opacity:0;transition:opacity .2s}
+.btn.sec:hover,.btn.sec:focus-visible{color:var(--osso)}
+.btn.sec:hover .seta,.btn.sec:focus-visible .seta{opacity:1}
+.tecla{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--osso);color:var(--breu);
+  font-family:var(--f-ui);font-weight:700;font-size:12px;margin-right:8px}
+.dicas{display:flex;gap:28px;justify-content:center;font-size:15px;color:var(--nevoa)}
+
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{position:relative;background:none;border:0;cursor:pointer;padding:8px 14px;font-family:var(--f-ui);font-size:15px;font-weight:500;color:var(--nevoa);border-radius:2px}
+.chip:hover{color:var(--osso);background:rgba(243,238,232,.05)}
+.chip[aria-pressed="true"]{color:var(--osso);font-weight:700}
+.chip[aria-pressed="true"]::after{content:"";position:absolute;left:14px;right:14px;bottom:2px;height:2px;background:var(--carmim);border-radius:2px}
+
+.item-lista{display:grid;gap:2px}
+.item-lista button{display:flex;align-items:center;gap:14px;width:100%;background:none;border:0;padding:10px 12px;cursor:pointer;text-align:left;position:relative;border-radius:2px}
+.item-lista .ic{width:40px;height:40px;border-radius:50%;background:var(--ferro);display:grid;place-items:center;flex:none;color:var(--nevoa)}
+.item-lista .tx{flex:1;font-size:16px}
+.item-lista .vl{color:var(--nevoa);font-size:15px;font-variant-numeric:tabular-nums}
+.item-lista button[aria-current="true"]{background:linear-gradient(90deg,rgba(243,238,232,.12),rgba(243,238,232,0))}
+.item-lista button[aria-current="true"] .ic{color:var(--osso);box-shadow:0 0 0 1.5px var(--osso)}
+
+/* MAPA */
+.mapa-sec{padding-bottom:88px}
+.mapa{position:relative;height:min(640px,76vh);min-height:440px;border-radius:6px;overflow:hidden;background:#000;touch-action:none;cursor:grab;
+  box-shadow:inset 0 0 0 1px var(--linha)}
+.mapa.arrastando{cursor:grabbing}
+.camada{position:absolute;left:0;top:0;width:1564px;height:952px;transform-origin:0 0}
+.camada > img{position:absolute;inset:0;width:1564px;height:952px;max-width:none;user-select:none;-webkit-user-drag:none}
+.camada svg.zonas{position:absolute;inset:0;width:1564px;height:952px}
+.zona{fill:transparent;stroke:transparent;stroke-width:4;cursor:pointer;outline:none}
+.zona:hover,.zona:focus-visible{fill:rgba(243,238,232,.06);stroke:rgba(243,238,232,.7)}
+.pino{position:absolute;transform:translate(-50%,-100%);background:none;border:0;padding:0;cursor:pointer;width:44px;height:58px;display:grid;justify-items:center}
+.pino svg{width:30px;height:52px;overflow:visible;filter:drop-shadow(0 0 6px rgba(200,50,58,.55))}
+.pino .n{position:absolute;top:-6px;right:-6px;min-width:22px;height:22px;padding:0 6px;border-radius:11px;background:var(--osso);color:var(--breu);
+  font-weight:700;font-size:13px;display:grid;place-items:center;font-variant-numeric:tabular-nums}
+.pino:hover svg,.pino:focus-visible svg{filter:drop-shadow(0 0 10px rgba(242,170,87,.9))}
+.pino.novo::before{content:"";position:absolute;bottom:-4px;left:50%;width:34px;height:12px;margin-left:-17px;border-radius:50%;
+  border:1.5px solid var(--carmim-claro);animation:onda 2.4s ease-out infinite}
+@keyframes onda{from{transform:scale(.5);opacity:1}to{transform:scale(2.2);opacity:0}}
+.hud{position:absolute;left:16px;top:16px;display:flex;align-items:center;gap:12px;pointer-events:none}
+.hud .bobina{width:54px;height:54px;border-radius:50%;background:radial-gradient(circle at 40% 35%,#5a3532,#2a1615);box-shadow:0 0 0 2px #1a0e0d,0 0 0 3px rgba(243,238,232,.35);
+  display:grid;place-items:center;font-family:var(--f-titulo);font-weight:700;font-size:15px;font-variant-numeric:tabular-nums}
+.hud .txt{font-size:14px;color:var(--nevoa);line-height:1.3;text-shadow:0 1px 4px #000}
+.hud .txt b{display:block;color:var(--osso);font-family:var(--f-titulo);font-size:16px;letter-spacing:.1em;font-weight:600}
+.zoom{position:absolute;right:16px;bottom:16px;display:grid;gap:6px}
+.zoom button{width:40px;height:40px;border-radius:50%;border:1.5px solid var(--linha);background:rgba(12,7,6,.8);cursor:pointer;font-size:20px;line-height:1}
+.zoom button:hover{border-color:var(--osso)}
+.cartela{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none;opacity:0;transition:opacity .5s}
+.cartela.ver{opacity:1}
+.cartela > div{display:grid;justify-items:center;gap:0;padding:24px;background:radial-gradient(closest-side,rgba(12,7,6,.85),rgba(12,7,6,0))}
+.cartela svg{width:min(300px,60vw);height:auto;color:var(--osso)}
+.cartela .nome{font-family:var(--f-titulo);font-size:clamp(34px,6vw,60px);letter-spacing:.06em;line-height:1;margin:4px 0}
+
+/* MINI FEED */
+.veu{position:fixed;inset:0;background:rgba(6,3,3,.72);display:grid;place-items:center;z-index:20;padding:16px}
+.feed{width:min(560px,100%);max-height:min(760px,calc(100vh - 32px));display:grid;grid-template-rows:auto auto 1fr auto;gap:14px}
+.feed .topo{display:flex;justify-content:space-between;align-items:start;gap:16px}
+.feed .topo small{display:block;font-size:13px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;color:var(--ambar)}
+.feed .fechar{background:none;border:1.5px solid var(--linha);border-radius:50%;width:36px;height:36px;cursor:pointer;flex:none;font-size:18px}
+.feed .fechar:hover{border-color:var(--osso)}
+.lista{overflow:auto;display:grid;gap:10px;padding-right:4px;align-content:start;min-height:0;scrollbar-color:var(--vinho) transparent}
+.post{background:rgba(243,238,232,.04);border-radius:4px;padding:14px;display:grid;gap:10px}
+.post .quem{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:10px;font-size:15px}
+.post .qm{display:grid;line-height:1.25;min-width:0}
+.post .qm .nm{display:flex;align-items:center;gap:6px;min-width:0}
+.post .qm b{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.post .qm small{font-size:13px;color:var(--nevoa)}
+.post .qm .insig{width:20px;height:20px;flex:none}
+.post .av{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:13px;background:var(--ferro);box-shadow:0 0 0 1.5px var(--osso)}
+
+.post .tag{font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--nevoa)}
+.post img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:3px;display:block}
+.post .titulo{font-weight:700}
+.post .lore{font-family:var(--f-lore);font-size:21px;line-height:1.35}
+.link{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:center;padding:12px;border-radius:3px;background:rgba(12,7,6,.6);box-shadow:inset 0 0 0 1px var(--linha);color:inherit;text-decoration:none}
+.link .ic{width:42px;height:42px;border-radius:3px;background:var(--ferro);display:grid;place-items:center}
+.link small{display:block;color:var(--nevoa);font-size:13px}
+.video{position:relative}
+.video img{aspect-ratio:16/9}
+.video .play{position:absolute;inset:0;margin:auto;width:56px;height:56px;border-radius:50%;background:rgba(12,7,6,.75);box-shadow:0 0 0 1.5px var(--osso);display:grid;place-items:center}
+.video .dur{position:absolute;right:8px;bottom:8px;background:rgba(12,7,6,.85);padding:2px 6px;border-radius:2px;font-size:13px;font-variant-numeric:tabular-nums}
+.audio{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center}
+.audio button{width:40px;height:40px;border-radius:50%;border:0;background:var(--osso);color:var(--breu);cursor:pointer;display:grid;place-items:center}
+.onda-a{display:flex;align-items:center;gap:2px;height:34px}
+.onda-a i{flex:1;background:var(--nevoa);border-radius:1px;opacity:.55}
+.onda-a i.ok{background:var(--carmim-claro);opacity:1}
+.audio time{font-size:13px;color:var(--nevoa);font-variant-numeric:tabular-nums}
+.rodape-post{display:flex;gap:16px;align-items:center;font-size:14px;color:var(--nevoa)}
+.rosario{display:inline-flex;align-items:center;gap:6px;background:none;border:0;cursor:pointer;color:var(--nevoa);padding:4px 0;font-variant-numeric:tabular-nums}
+.rosario svg{width:22px;height:14px}
+.rosario[aria-pressed="true"]{color:var(--carmim-claro)}
+
+/* TIPOS DE POST */
+.tipos-post{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;align-items:start}
+.tipos-post .post{background:var(--fuligem)}
+
+/* MOLDURAS */
+.sub{font-size:16px;letter-spacing:.16em;text-transform:uppercase;color:var(--nevoa);margin:8px 0 16px;font-family:var(--f-ui);font-weight:700}
+.titulos{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin-bottom:40px}
+.tit{margin:0;background:var(--fuligem);border-radius:6px;padding:24px 20px 20px;display:grid;justify-items:center;gap:2px;min-width:0;overflow:hidden}
+.tit svg{width:100%;max-width:300px;height:auto;color:var(--osso)}
+.tit .nome-reg{font-family:var(--f-titulo);font-size:28px;letter-spacing:.06em;line-height:1.1;margin:2px 0}
+.tit figcaption{margin-top:14px;font-size:15px;color:var(--nevoa);text-align:center}
+.tit figcaption b{display:block;color:var(--osso);font-size:13px;letter-spacing:.14em;text-transform:uppercase}
+.ornamentos{margin-bottom:40px}
+.orn-card{overflow:hidden}
+.orn-card .palco svg{max-width:100%}
+.canto-demo{width:150px;height:110px;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr}
+.canto-demo svg{width:62px;height:62px}
+.canto-demo svg:last-child{grid-column:2;grid-row:2;justify-self:end;align-self:end}
+.abertura .moldura-topo,.abertura .moldura-base{width:min(520px,90vw)}
+
+/* BOTÕES */
+.bt{min-height:46px;padding:0 22px;border-radius:0;border:1.5px solid var(--osso);background:var(--osso);color:var(--breu);cursor:pointer;
+  font-family:var(--f-titulo);font-weight:700;font-size:15px;letter-spacing:.1em;position:relative;
+  box-shadow:inset 0 0 0 3px var(--osso),inset 0 0 0 4px var(--breu);transition:background .15s,color .15s}
+.bt:hover{background:#fff}
+.bt:active{transform:translateY(1px)}
+.bt.sec{background:transparent;color:var(--osso);box-shadow:inset 0 0 0 3px var(--breu),inset 0 0 0 4px rgba(243,238,232,.3)}
+.bt.sec:hover{background:rgba(243,238,232,.08)}
+.bt.perigo{background:transparent;color:var(--carmim-claro);border-color:var(--carmim-claro);box-shadow:none}
+.bt.perigo:hover{background:rgba(200,50,58,.15)}
+.bt:disabled{opacity:.4;cursor:not-allowed}
+
+/* MODAL SIMPLES */
+.modal-simples{position:relative;background:var(--fuligem);border:1px solid var(--linha);padding:26px 26px 22px;display:grid;gap:12px}
+.modal-simples p{color:var(--nevoa)}
+.modal-simples .acoes{margin-top:6px}
+.kc{position:absolute;width:44px;height:44px;color:var(--osso);pointer-events:none}
+.kc.a{top:-7px;left:-7px}
+.kc.b{bottom:-7px;right:-7px;transform:scale(-1,-1)}
+
+/* MICRO */
+.micro{position:relative;height:min(560px,74vh);min-height:380px;overflow:hidden;border-radius:6px;background:#000;outline-offset:4px;box-shadow:inset 0 0 0 1px var(--linha);user-select:none;touch-action:none;cursor:grab}
+.micro.arrastando{cursor:grabbing}
+.m-camada{position:absolute;left:0;top:0;width:4096px;height:3043px;transform-origin:0 0}
+.m-camada img{width:4096px;height:3043px;max-width:none;display:block;-webkit-user-drag:none}
+.m-sobre{position:absolute;inset:0;pointer-events:none}
+.m-sobre > *{pointer-events:auto}
+.m-sobre .pino{z-index:2}
+.m-sobre .pino .nm{position:absolute;top:100%;left:50%;transform:translateX(-50%);margin-top:4px;font-size:13px;white-space:nowrap;color:var(--osso);background:rgba(12,7,6,.85);padding:2px 8px;opacity:0;transition:opacity .2s;pointer-events:none}
+.m-sobre .pino:hover .nm,.m-sobre .pino:focus-visible .nm{opacity:1}
+.pino.visto svg{filter:none;opacity:.6}
+.marca{position:absolute;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:#261A18;box-shadow:0 0 0 2px var(--osso),0 0 14px rgba(0,0,0,.8);overflow:hidden;pointer-events:none;z-index:3}
+.marca svg{width:100%;height:100%}
+.marca.eu{box-shadow:0 0 0 2.5px var(--carmim-claro),0 0 0 5px rgba(12,7,6,.8),0 0 18px rgba(200,50,58,.6)}
+.marca.andando{animation:quica .3s ease-in-out infinite alternate}
+@keyframes quica{to{transform:translate(-50%,-58%)}}
+.marca-nome{position:absolute;transform:translate(-50%,28px);font-size:12px;color:var(--nevoa);white-space:nowrap;pointer-events:none;text-shadow:0 1px 4px #000;z-index:3}
+.marca.outro{opacity:.75}
+.aviso-poi{position:absolute;transform:translate(-50%,calc(-100% - 64px));display:flex;align-items:center;gap:8px;padding:6px 10px;background:rgba(12,7,6,.9);
+  font-family:var(--f-titulo);font-size:14px;letter-spacing:.08em;white-space:nowrap;box-shadow:0 0 0 1px var(--linha);z-index:4;pointer-events:none}
+.aviso-poi .tecla{margin:0}
+.m-hud{position:absolute;left:16px;top:14px;display:grid;line-height:1.2;text-shadow:0 1px 6px #000;pointer-events:none}
+.m-hud small{font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:700}
+.m-hud b{font-family:var(--f-titulo);font-size:22px;letter-spacing:.06em}
+.m-hud span{font-size:14px;color:var(--nevoa)}
+.m-viajar{position:absolute;right:14px;top:14px;min-height:38px;padding:0 14px;font-size:13px;background:rgba(12,7,6,.7)}
+/* PEREGRINO */
+.criador{display:grid;grid-template-columns:minmax(260px,360px) 1fr;gap:32px;align-items:start}
+.vitrine{position:relative;background:radial-gradient(90% 70% at 50% 85%,#3a1a16,var(--fuligem) 70%);border:1px solid var(--linha);padding:28px 20px 22px;display:grid;justify-items:center;gap:0}
+.vitrine .kc{width:56px;height:56px}
+.vit-av{width:150px;height:225px;position:relative;z-index:1}
+.vit-av svg{width:100%;height:100%;overflow:visible}
+.vit-chao{width:200px;height:14px;margin-top:-8px;margin-bottom:22px;border-radius:50%;background:radial-gradient(closest-side,rgba(0,0,0,.7),transparent)}
+.opcoes{display:grid;gap:22px;min-width:0}
+.grupo h3{font-size:13px;letter-spacing:.16em;text-transform:uppercase;font-family:var(--f-ui);font-weight:700;color:var(--nevoa);margin-bottom:10px}
+.ops{display:flex;flex-wrap:wrap;gap:8px}
+.op{position:relative;min-width:54px;height:54px;padding:0 12px;border:1.5px solid var(--linha);background:var(--fuligem);cursor:pointer;display:grid;place-items:center;font-size:14px;color:var(--nevoa)}
+.op svg{width:34px;height:40px;overflow:visible}
+.op:hover{border-color:rgba(243,238,232,.5);color:var(--osso)}
+.op[aria-pressed="true"]{border-color:var(--osso);color:var(--osso);background:var(--ferro)}
+.op.cor{width:54px;padding:0}
+.op.cor i{width:30px;height:30px;display:block}
+.op.trancada{opacity:.45;cursor:not-allowed}
+.op .cad{position:absolute;right:-6px;top:-6px;width:20px;height:20px;border-radius:50%;background:var(--breu);box-shadow:0 0 0 1px var(--linha);display:grid;place-items:center}
+.dica-tranca{font-size:14px;color:var(--nevoa);min-height:22px;margin-top:8px}
+
+/* PERFIL */
+.perfil-grade{display:grid;grid-template-columns:minmax(280px,420px) 1fr;gap:36px;align-items:start}
+.perfil-col{display:grid;gap:16px;min-width:0}
+.cartao{position:relative;background:var(--fuligem);border:1px solid var(--linha);overflow:hidden}
+.capa{height:130px;overflow:hidden}
+.capa img{width:100%;height:100%;object-fit:cover;filter:brightness(.8)}
+.retrato{position:absolute;left:20px;top:72px;width:112px;height:112px}
+.retrato svg{width:100%;height:100%;overflow:visible}
+.p-info{padding:14px 20px 0 148px;min-height:62px;display:grid;gap:2px}
+.p-nome{font-family:var(--f-titulo);font-size:20px;letter-spacing:.04em}
+.p-titulo{font-family:var(--f-lore);font-style:italic;font-size:18px;color:var(--ambar);line-height:1.2}
+.p-linha{display:flex;align-items:center;gap:10px}
+.insig{display:inline-block;width:40px;height:40px;animation:flutua 3.4s ease-in-out infinite;filter:drop-shadow(0 0 6px rgba(242,170,87,.35)) drop-shadow(0 3px 4px rgba(0,0,0,.6))}
+.insig svg{width:100%;height:100%;display:block}
+@keyframes flutua{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-4px) rotate(3deg)}}
+.p-nums{display:flex;gap:24px;padding:22px 20px 18px;font-size:14px;color:var(--nevoa)}
+.p-nums b{display:block;color:var(--osso);font-size:20px;font-variant-numeric:tabular-nums}
+.pecas{display:grid;grid-template-columns:repeat(auto-fill,minmax(118px,1fr));gap:8px}
+.peca{position:relative;border:1.5px solid var(--linha);background:var(--fuligem);cursor:pointer;padding:8px;display:grid;gap:6px;justify-items:center;text-align:center;font-size:14px;color:var(--nevoa);min-height:96px;align-content:center}
+.peca img{width:100%;height:54px;object-fit:cover}
+.peca svg{width:54px;height:54px;overflow:visible}
+.peca[aria-pressed="true"]{border-color:var(--osso);color:var(--osso);background:var(--ferro)}
+.peca.trancada{cursor:not-allowed}
+.peca.trancada > :not(.cad){opacity:.35}
+.peca .cad{position:absolute;right:6px;top:6px}
+.peca small{font-size:12px;line-height:1.25}
+.conquistas{display:grid;gap:10px;min-width:0}
+.cq{position:relative;display:grid;grid-template-columns:48px 1fr;gap:14px;padding:14px 16px;background:var(--fuligem);border:1px solid var(--linha)}
+.cq .ic{width:48px;height:48px;border-radius:50%;background:var(--ferro);display:grid;place-items:center;color:var(--nevoa)}
+.cq.feita .ic{color:var(--breu);background:var(--osso)}
+.cq .kc{width:30px;height:30px;display:none}
+.cq.feita .kc{display:block}
+.cq.feita .kc.a{top:-5px;left:-5px}.cq.feita .kc.b{bottom:-5px;right:-5px}
+.cq h3{font-size:17px;letter-spacing:.04em}
+.cq p{font-size:15px;color:var(--nevoa)}
+.fio{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;margin-top:8px}
+.fio .trilho{position:relative;height:2px;background:var(--linha)}
+.fio .trilho i{position:absolute;left:0;top:0;height:2px;background:var(--carmim);transition:width .4s}
+.fio .trilho i::after{content:"";position:absolute;right:-3px;top:-3px;width:8px;height:8px;transform:rotate(45deg);background:var(--carmim-claro)}
+.fio span{font-size:13px;color:var(--nevoa);font-variant-numeric:tabular-nums}
+.premio{font-size:13px;color:var(--ambar);margin-top:6px;letter-spacing:.02em}
+.cq.feita .premio{color:var(--broto)}
+
+.aviso{position:fixed;left:50%;bottom:max(24px,env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:30;width:min(420px,calc(100% - 32px));
+  background:rgba(12,7,6,.94);border:1px solid var(--linha);padding:4px 24px 18px;display:grid;justify-items:center;text-align:center;gap:2px;animation:sobe .5s ease-out}
+.aviso svg{width:240px;height:auto;color:var(--osso);margin-bottom:-6px}
+.aviso small{font-size:12px;letter-spacing:.2em;text-transform:uppercase;font-weight:700;color:var(--ambar)}
+.aviso b{font-family:var(--f-titulo);font-size:22px;letter-spacing:.04em}
+.aviso span{color:var(--nevoa);font-size:15px}
+@keyframes sobe{from{transform:translate(-50%,20px);opacity:0}}
+
+@media (max-width:860px){
+  .criador,.perfil-grade{grid-template-columns:1fr}
+}
+@media (max-width:760px){
+  .ref,.ref.g,.ref.m{grid-column:span 6;grid-row:auto}
+  .ref.g img{height:auto;aspect-ratio:16/9;min-height:0}
+  section{padding-block:64px 16px}
+  .esp-titulo{font-size:34px}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+{{SPRITE}}
+  <symbol id="carretel" viewBox="0 0 420 28">
+    <path d="M0 14 L170 13 L186 14 L170 15 Z M420 14 L250 13 L234 14 L250 15 Z" fill="currentColor"/>
+    <circle cx="210" cy="14" r="11" fill="none" stroke="currentColor" stroke-width="1.6"/>
+    <path d="M202 9.5h16M200 14h20M202 18.5h16" stroke="currentColor" stroke-width="1.4"/>
+    <path d="M192 14l-6-4v8zM228 14l6-4v8z" fill="currentColor"/>
+  </symbol>
+  <symbol id="agulha" viewBox="0 0 30 52">
+    <path d="M15 51 L12.6 14 Q15 2 17.4 14 Z" fill="#F3EEE8"/>
+    <ellipse cx="15" cy="12" rx="1.1" ry="3.4" fill="#140d0b"/>
+    <path d="M15 9 C 4 4, 3 22, 13 22 S 27 30, 22 40" fill="none" stroke="#C8323A" stroke-width="2.2" stroke-linecap="round"/>
+  </symbol>
+  <symbol id="contas" viewBox="0 0 22 14"><circle cx="4" cy="7" r="3.2" fill="currentColor"/><circle cx="11" cy="7" r="3.2" fill="currentColor"/><circle cx="18" cy="7" r="3.2" fill="currentColor"/></symbol>
+</svg>
+
+<header class="abertura">
+  <canvas id="brasas" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <svg class="moldura-topo orn" viewBox="0 0 600 120" aria-hidden="true"><use href="#t-agulha"/></svg>
+    <h1><span class="marca-1">HOLLOW PAGE</span><br><span class="marca-2">Pharloom</span></h1>
+    <svg class="moldura-base orn" viewBox="0 0 600 120" aria-hidden="true" style="transform:scaleY(-1)"><use href="#t-carretel"/></svg>
+    <p class="tese">Um mapa do reino onde cada ponto guarda o que os fãs fizeram ali.</p>
+    <ul class="menu" aria-label="Menu principal">
+      <li><button aria-current="true"><svg class="seta e orn" viewBox="0 0 80 145"><use href="#seta-lateral"/></svg>Explorar o mapa<svg class="seta d orn" viewBox="0 0 80 145"><use href="#seta-lateral"/></svg></button></li>
+      <li><button><svg class="seta e orn" viewBox="0 0 80 145"><use href="#seta-lateral"/></svg>Publicar<svg class="seta d orn" viewBox="0 0 80 145"><use href="#seta-lateral"/></svg></button></li>
+      <li><button><svg class="seta e orn" viewBox="0 0 80 145"><use href="#seta-lateral"/></svg>Meu caderno<svg class="seta d orn" viewBox="0 0 80 145"><use href="#seta-lateral"/></svg></button></li>
+      <li><button><svg class="seta e orn" viewBox="0 0 80 145"><use href="#seta-lateral"/></svg>Entrar<svg class="seta d orn" viewBox="0 0 80 145"><use href="#seta-lateral"/></svg></button></li>
+    </ul>
+  </div>
+</header>
+
+<main>
+<section class="wrap" id="cenarios">
+  <div class="cab">
+    <h2>Cenários</h2>
+    <svg class="carretel" aria-hidden="true"><use href="#carretel"/></svg>
+    <p>A Hollow Page era azul e lunar. Aqui o fundo esquenta: musgo, brasa e o vermelho da capa da Hornet sobre um preto que puxa para o vinho.</p>
+  </div>
+  <div class="refs">
+    <figure class="ref g"><img src="refs/musgo.webp" alt="Hornet numa gruta de musgo verde com uma gaiola dourada caída" loading="lazy"><figcaption><b>Musgo</b>Camadas de verde com névoa e vagalumes. Fundo das regiões verdes do mapa; os vagalumes viram as partículas da tela.</figcaption></figure>
+    <figure class="ref"><img src="refs/forja.webp" alt="Ponte de ferro sobre lava com fagulhas laranja" loading="lazy"><figcaption><b>Forja</b>Fagulhas e contraluz laranja. Ponto quente: onde tem post novo, o mapa brilha.</figcaption></figure>
+    <figure class="ref"><img src="refs/docas.webp" alt="Nome de área Deep Docks entre dois ornamentos brancos" loading="lazy"><figcaption><b>Nome de área</b>Título entre duas molduras ao entrar numa região do mapa.</figcaption></figure>
+    <figure class="ref m"><img src="refs/perfis.webp" alt="Tela de seleção de perfil com quatro molduras brancas" loading="lazy"><figcaption><b>Molduras abertas</b>Canto pesado em cima à esquerda e embaixo à direita, linha fina entre eles. Cards e seleção.</figcaption></figure>
+    <figure class="ref m"><img src="refs/loja.webp" alt="Loja com lista de itens e painel de descrição ornamentado" loading="lazy"><figcaption><b>Lista com painel</b>Item ativo marcado entre setas, descrição ao lado. É o desenho do mini feed.</figcaption></figure>
+    <figure class="ref m"><img src="refs/doacao.webp" alt="Painel translúcido de doação sobre o cenário" loading="lazy"><figcaption><b>Painel sobre o jogo</b>Véu escuro com o cenário aparecendo por trás e um divisor vertical fino. Modal de post.</figcaption></figure>
+    <figure class="ref m"><img src="refs/titulo.webp" alt="Menu da tela título com setas ornamentadas no item ativo" loading="lazy"><figcaption><b>Menu de título</b>Itens em versalete, setas aparecem só no ativo. Navegação principal.</figcaption></figure>
+  </div>
+</section>
+
+<section class="wrap" id="paleta">
+  <div class="cab">
+    <h2>Paleta</h2>
+    <svg class="carretel" aria-hidden="true"><use href="#carretel"/></svg>
+    <p>Tiradas dos prints. O osso é a única cor dos ornamentos. O carmim aparece pouco e sempre quer dizer a mesma coisa: aqui tem gente.</p>
+  </div>
+  <div class="familias">
+    <div class="familia">
+      <h3>Fundo</h3>
+      <p>Preto da tela de perfis, puxado para o vermelho.</p>
+      <div class="amostras">
+        <div class="amostra"><i style="background:#0C0706"></i><span>Breu<small>página</small></span><code>#0C0706</code></div>
+        <div class="amostra"><i style="background:#171010"></i><span>Fuligem<small>cards, mapa</small></span><code>#171010</code></div>
+        <div class="amostra"><i style="background:#261A18"></i><span>Ferro<small>superfície elevada</small></span><code>#261A18</code></div>
+        <div class="amostra"><i style="background:#4A2220"></i><span>Vinho<small>brilho de fundo, hover</small></span><code>#4A2220</code></div>
+      </div>
+    </div>
+    <div class="familia">
+      <h3>Seda e osso</h3>
+      <p>Ornamento, texto e o fio vermelho da Hornet.</p>
+      <div class="amostras">
+        <div class="amostra"><i style="background:#F3EEE8"></i><span>Osso<small>ornamentos, texto</small></span><code>#F3EEE8</code></div>
+        <div class="amostra"><i style="background:#BFB2AC"></i><span>Névoa<small>texto de apoio</small></span><code>#BFB2AC</code></div>
+        <div class="amostra"><i style="background:#C8323A"></i><span>Carmim<small>alfinete, ativo, reação</small></span><code>#C8323A</code></div>
+        <div class="amostra"><i style="background:#E8636A"></i><span>Carmim claro<small>erro, texto sobre breu</small></span><code>#E8636A</code></div>
+      </div>
+    </div>
+    <div class="familia">
+      <h3>Regiões</h3>
+      <p>Tingem o mapa e o topo do mini feed de cada lugar.</p>
+      <div class="amostras">
+        <div class="amostra"><i style="background:#376742"></i><span>Musgo<small>regiões verdes</small></span><code>#376742</code></div>
+        <div class="amostra"><i style="background:#8CC06F"></i><span>Broto<small>sucesso, vagalume</small></span><code>#8CC06F</code></div>
+        <div class="amostra"><i style="background:#E8873C"></i><span>Brasa<small>regiões de forja</small></span><code>#E8873C</code></div>
+        <div class="amostra"><i style="background:#F2AA57"></i><span>Âmbar<small>foco, post novo</small></span><code>#F2AA57</code></div>
+      </div>
+    </div>
+  </div>
+  <div class="proporcao" aria-hidden="true">
+    <i style="flex:52;background:#0C0706;box-shadow:inset 0 0 0 1px rgba(243,238,232,.1)"></i><i style="flex:18;background:#171010"></i><i style="flex:8;background:#4A2220"></i><i style="flex:10;background:#F3EEE8"></i><i style="flex:5;background:#376742"></i><i style="flex:4;background:#E8873C"></i><i style="flex:3;background:#C8323A"></i>
+  </div>
+  <div class="legenda-prop"><span>quanto de cada uma aparece numa tela</span><span>carmim só em 3%</span></div>
+</section>
+
+<section class="wrap" id="tipografia">
+  <div class="cab">
+    <h2>Tipografia</h2>
+    <svg class="carretel" aria-hidden="true"><use href="#carretel"/></svg>
+    <p>Sai a Inknut Antiqua, entra a Cinzel, que tem o desenho romano dos menus do jogo. A Alegreya Sans continua, é o que liga as duas versões.</p>
+  </div>
+  <div class="tipos">
+    <div class="tipo">
+      <span class="rot">Títulos e menus</span>
+      <div class="esp-titulo">Bone Bottom</div>
+      <div class="escala"><span>Cinzel 600, sempre em versalete visual</span><span>112 marca, 56 região, 40 seção, 20 menu</span></div>
+    </div>
+    <div class="tipo">
+      <span class="rot">Textos curtos dos fãs</span>
+      <div class="esp-lore">“A estrada é dura para nós, peregrinos. Deixei um desenho no banco para quem vier depois.”</div>
+      <div class="escala"><span>Cormorant Garamond 500</span><span>21 a 24, como as falas e descrições do jogo</span></div>
+    </div>
+    <div class="tipo">
+      <span class="rot">Interface</span>
+      <div class="esp-ui"><b>@lira</b> publicou em <b>Deep Docks</b><br><span style="color:var(--nevoa)">há 2 dias, 48 rosários</span></div>
+      <div class="escala"><span>Alegreya Sans 400, 500 e 700</span><span>17 texto, 15 apoio, 13 rótulo em caixa alta</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap" id="ornamentos">
+  <div class="cab">
+    <h2>Ornamentos</h2>
+    <svg class="carretel" aria-hidden="true"><use href="#carretel"/></svg>
+    <p>Só em osso, sempre. As molduras de título novas trocam os bichos do primeiro jogo por objetos de Pharloom: agulha, carretel, sino e espinho. Cada região usa uma.</p>
+  </div>
+  <h3 class="sub">Molduras de título</h3>
+  <div class="titulos">
+    <figure class="tit"><svg class="orn" viewBox="0 0 600 120" aria-hidden="true"><use href="#t-agulha"/></svg><span class="nome-reg">Moss Grotto</span><svg class="orn" viewBox="0 0 600 120" aria-hidden="true" style="transform:scaleY(-1)"><use href="#t-agulha"/></svg><figcaption><b>Agulha</b>Regiões de musgo e o começo da jornada.</figcaption></figure>
+    <figure class="tit"><svg class="orn" viewBox="0 0 600 120" aria-hidden="true"><use href="#t-carretel"/></svg><span class="nome-reg">Deep Docks</span><svg class="orn" viewBox="0 0 600 120" aria-hidden="true" style="transform:scaleY(-1)"><use href="#t-carretel"/></svg><figcaption><b>Carretel</b>Forjas, docas e lugares de trabalho.</figcaption></figure>
+    <figure class="tit"><svg class="orn" viewBox="0 0 600 120" aria-hidden="true"><use href="#t-sino"/></svg><span class="nome-reg">Bellhart</span><svg class="orn" viewBox="0 0 600 120" aria-hidden="true" style="transform:scaleY(-1)"><use href="#t-sino"/></svg><figcaption><b>Sino</b>Cidades e a cidadela.</figcaption></figure>
+    <figure class="tit"><svg class="orn" viewBox="0 0 600 120" aria-hidden="true"><use href="#t-espinho"/></svg><span class="nome-reg">The Marrow</span><svg class="orn" viewBox="0 0 600 120" aria-hidden="true" style="transform:scaleY(-1)"><use href="#t-espinho"/></svg><figcaption><b>Espinho</b>Lugares hostis e profundos.</figcaption></figure>
+  </div>
+  <h3 class="sub">Cantos</h3>
+  <div class="ornamentos">
+    <div class="orn-card"><div class="palco"><div class="canto-demo"><svg class="orn" viewBox="0 0 120 120"><use href="#k-liso"/></svg><svg class="orn" viewBox="0 0 120 120" style="transform:scale(-1,-1)"><use href="#k-liso"/></svg></div></div><div><h3>Voluta</h3><p>Card de post e modal simples.</p></div></div>
+    <div class="orn-card"><div class="palco"><div class="canto-demo"><svg class="orn" viewBox="0 0 120 120"><use href="#k-espinho"/></svg><svg class="orn" viewBox="0 0 120 120" style="transform:scale(-1,-1)"><use href="#k-espinho"/></svg></div></div><div><h3>Espinho</h3><p>Aviso, perigo e excluir.</p></div></div>
+    <div class="orn-card"><div class="palco"><div class="canto-demo"><svg class="orn" viewBox="0 0 120 120"><use href="#k-fio"/></svg><svg class="orn" viewBox="0 0 120 120" style="transform:scale(-1,-1)"><use href="#k-fio"/></svg></div></div><div><h3>Fio</h3><p>Conquista desbloqueada e perfil.</p></div></div>
+    <div class="orn-card"><div class="palco"><div class="canto-demo"><svg class="orn" viewBox="0 0 230 185"><use href="#canto-superior"/></svg><svg class="orn" viewBox="0 0 230 190" style="align-self:end"><use href="#canto-inferior-dir"/></svg></div></div><div><h3>Volutas da Hollow Page</h3><p>Os cantos que você vetorizou. Ficam para o modal grande.</p></div></div>
+  </div>
+  <h3 class="sub">Pequenos</h3>
+  <div class="ornamentos">
+    <div class="orn-card"><div class="palco"><svg class="orn" viewBox="0 0 52 52" width="56" height="56"><use href="#canto-de-selecao"/></svg></div><div><h3>Canto de seleção</h3><p>Campo em foco e item escolhido.</p></div></div>
+    <div class="orn-card"><div class="palco"><svg class="orn" viewBox="0 0 80 145" width="36" height="66"><use href="#seta-lateral"/></svg></div><div><h3>Seta lateral</h3><p>Item ativo do menu e links.</p></div></div>
+    <div class="orn-card"><div class="palco"><svg class="orn" viewBox="0 0 420 28" style="width:100%;max-width:220px;height:auto"><use href="#carretel"/></svg></div><div><h3>Divisor de carretel</h3><p>Entre título e texto de cada seção.</p></div></div>
+    <div class="orn-card"><div class="palco"><svg class="orn" viewBox="0 0 90 46" width="90" height="46"><use href="#seta-de-lista-baixo"/></svg></div><div><h3>Seta de lista</h3><p>Fim da rolagem quando tem mais posts.</p></div></div>
+  </div>
+</section>
+
+<section class="wrap" id="componentes">
+  <div class="cab">
+    <h2>Componentes</h2>
+    <svg class="carretel" aria-hidden="true"><use href="#carretel"/></svg>
+    <p>Retângulos de canto reto, linha fina e ornamento só onde o momento pede. O modal grande fica para publicar e para conquistas; o resto usa o simples.</p>
+  </div>
+  <div class="comp">
+    <div class="bloco">
+      <span class="rot">Modal simples, o padrão</span>
+      <div class="modal-simples">
+        <svg class="kc a orn" viewBox="0 0 120 120" aria-hidden="true"><use href="#k-liso"/></svg>
+        <svg class="kc b orn" viewBox="0 0 120 120" aria-hidden="true"><use href="#k-liso"/></svg>
+        <h3>Sair da conta?</h3>
+        <p>Seu personagem fica parado no último banco em que você sentou.</p>
+        <div class="acoes"><button class="bt">Sair</button><button class="bt sec">Ficar</button></div>
+      </div>
+      <span class="rot">Modal grande, só para momentos</span>
+      <div class="moldura painel">
+        <svg class="c tl orn" viewBox="0 0 230 185" aria-hidden="true"><use href="#canto-superior"/></svg>
+        <svg class="c tr orn" viewBox="0 0 230 185" aria-hidden="true"><use href="#canto-superior-dir"/></svg>
+        <svg class="c bl orn" viewBox="0 0 230 190" aria-hidden="true"><use href="#canto-inferior"/></svg>
+        <svg class="c br orn" viewBox="0 0 230 190" aria-hidden="true"><use href="#canto-inferior-dir"/></svg>
+        <div style="display:grid;gap:14px">
+          <h3>Fixar neste ponto?</h3>
+          <p>Seu post fica no banco de Bone Bottom. Quem passar por lá vai ver.</p>
+          <div class="dicas" style="justify-content:flex-start;margin-top:6px"><span><span class="tecla">↵</span>Fixar</span><span><span class="tecla">Esc</span>Voltar</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="bloco">
+      <span class="rot">Campos</span>
+      <div class="campo"><label for="c1">Título</label><div class="caixa"><svg class="k a orn" viewBox="0 0 52 52"><use href="#canto-de-selecao"/></svg><input id="c1" placeholder="Hornet no musgo"><svg class="k b orn" viewBox="0 0 52 52"><use href="#selecao-id"/></svg></div></div>
+      <div class="campo"><label for="c2">Link do mod</label><div class="caixa foco"><svg class="k a orn" viewBox="0 0 52 52"><use href="#canto-de-selecao"/></svg><input id="c2" value="nexusmods.com/silksong/mods/218"><svg class="k b orn" viewBox="0 0 52 52"><use href="#selecao-id"/></svg></div></div>
+      <div class="campo"><label for="c3">Duração do áudio</label><div class="caixa erro"><svg class="k a orn" viewBox="0 0 52 52"><use href="#canto-de-selecao"/></svg><input id="c3" value="11:40" aria-describedby="e3" aria-invalid="true"><svg class="k b orn" viewBox="0 0 52 52"><use href="#selecao-id"/></svg></div><span class="msg-erro" id="e3">O áudio pode ter até 5 minutos. Corte um trecho e envie de novo.</span></div>
+    </div>
+    <div class="bloco">
+      <span class="rot">Botões</span>
+      <div class="acoes">
+        <button class="bt">Publicar</button>
+        <button class="bt sec">Salvar rascunho</button>
+        <button class="bt perigo">Excluir</button>
+        <button class="bt" disabled>Enviando</button>
+      </div>
+      <span class="rot">Links</span>
+      <div class="acoes">
+        <button class="btn"><svg class="seta orn" viewBox="0 0 80 145"><use href="#seta-lateral"/></svg>Ver no mapa<svg class="seta d orn" viewBox="0 0 80 145"><use href="#seta-lateral"/></svg></button>
+        <button class="btn sec"><svg class="seta orn" viewBox="0 0 80 145"><use href="#seta-lateral"/></svg>Voltar<svg class="seta d orn" viewBox="0 0 80 145"><use href="#seta-lateral"/></svg></button>
+      </div>
+      <span class="rot">Filtros</span>
+      <div class="chips" data-grupo="demo">
+        <button class="chip" aria-pressed="true">Tudo</button><button class="chip" aria-pressed="false">Arte</button><button class="chip" aria-pressed="false">Mod</button><button class="chip" aria-pressed="false">Texto</button><button class="chip" aria-pressed="false">Vídeo</button><button class="chip" aria-pressed="false">Áudio</button>
+      </div>
+      <span class="rot">Lista</span>
+      <div class="item-lista">
+        <button aria-current="true"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="1"/><path d="M3 16l5-5 4 4 3-3 6 6"/></svg></span><span class="tx">Fanarts</span><span class="vl">31</span></button>
+        <button><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 18V6l10-2v12"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/></svg></span><span class="tx">Áudios</span><span class="vl">6</span></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap mapa-sec" id="mapa">
+  <div class="cab">
+    <h2>Viajar</h2>
+    <svg class="carretel" aria-hidden="true"><use href="#carretel"/></svg>
+    <p>O mapa grande é a viagem rápida: mostra como as regiões se ligam e onde tem movimento. Arraste para olhar, clique numa agulha para ver os posts dali ou no nome de uma região para entrar nela.</p>
+  </div>
+  <div class="mapa" id="mapa-el" aria-label="Mapa de Pharloom">
+    <div class="camada" id="camada"></div>
+    <div class="hud" aria-hidden="true"><div class="bobina" id="hud-n">0</div><div class="txt"><b>Pharloom</b>posts no mapa</div></div>
+    <div class="zoom"><button id="zmais" aria-label="Aproximar">+</button><button id="zmenos" aria-label="Afastar">−</button></div>
+  </div>
+</section>
+
+<section class="wrap mapa-sec" id="explorar">
+  <div class="cab">
+    <h2>Explorar</h2>
+    <svg class="carretel" aria-hidden="true"><use href="#carretel"/></svg>
+    <p>Dentro de uma região o mapa vira o mapa de salas do jogo. Seu vessel anda até onde você clicar (ou pelas setas do teclado); perto de um ponto aparece o aviso para ver os posts. Quem está online aparece no mapa também.</p>
+  </div>
+  <div class="micro" id="micro" tabindex="0" aria-label="Mapa da região. Setas andam, Enter abre o ponto mais perto">
+    <div class="m-camada" id="m-camada"><img src="refs/mapa-salas.webp" alt="Mapa de salas de Pharloom" width="4096" height="3043" draggable="false"></div>
+    <div class="m-sobre" id="m-sobre"></div>
+    <div class="m-hud"><small id="m-reg-cor">Região</small><b id="m-reg">Bone Bottom</b><span id="m-prog">0 de 0 pontos vistos</span></div>
+    <button class="bt sec m-viajar" id="m-viajar">Viajar</button>
+    <div class="zoom"><button id="mz-mais" aria-label="Aproximar">+</button><button id="mz-menos" aria-label="Afastar">−</button></div>
+    <div class="cartela" id="cartela" aria-live="polite"><div>
+      <svg class="orn" viewBox="0 0 600 120" aria-hidden="true"><use href="#t-espinho"/></svg>
+      <div class="nome" id="cartela-nome"></div>
+      <svg class="orn" viewBox="0 0 600 120" aria-hidden="true" style="transform:scaleY(-1)"><use href="#t-espinho"/></svg>
+    </div></div>
+  </div>
+</section>
+
+<section class="wrap" id="posts" style="padding-bottom:96px">
+  <div class="cab">
+    <h2>Cinco jeitos de deixar algo</h2>
+    <svg class="carretel" aria-hidden="true"><use href="#carretel"/></svg>
+    <p>Todo post tem o mesmo topo e o mesmo rodapé. Só o meio muda. A reação é em rosários, a moeda do jogo.</p>
+  </div>
+  <div class="tipos-post" id="tipos-post"></div>
+</section>
+
+<section class="wrap" id="peregrino">
+  <div class="cab">
+    <h2>Seu vessel</h2>
+    <svg class="carretel" aria-hidden="true"><use href="#carretel"/></svg>
+    <p>A casca que é você no mapa. Ele não luta nem perde vida, só anda e aparece para os outros. As peças trancadas saem das conquistas.</p>
+  </div>
+  <div class="criador">
+    <div class="vitrine">
+      <svg class="kc a orn" viewBox="0 0 120 120" aria-hidden="true"><use href="#k-fio"/></svg>
+      <svg class="kc b orn" viewBox="0 0 120 120" aria-hidden="true"><use href="#k-fio"/></svg>
+      <div class="vit-av" id="vit-av"></div>
+      <div class="vit-chao"></div>
+      <div class="acoes" style="justify-content:center"><button class="bt sec" id="sortear">Sortear</button><button class="bt" id="ir-mapa">Andar no mapa</button></div>
+    </div>
+    <div class="opcoes" id="opcoes"></div>
+  </div>
+</section>
+
+<section class="wrap" id="perfil" style="padding-bottom:96px">
+  <div class="cab">
+    <h2>Perfil e conquistas</h2>
+    <svg class="carretel" aria-hidden="true"><use href="#carretel"/></svg>
+    <p>Explorar, ler e publicar rende conquistas. Cada uma destrava algo para o perfil: capa, moldura do retrato, título e a insígnia que flutua ao lado do seu nome, inclusive nos seus posts. Andar pelo mapa local acima já conta.</p>
+  </div>
+  <div class="perfil-grade">
+    <div class="perfil-col">
+      <div class="cartao" id="cartao">
+        <div class="capa"><img id="capa-img" src="refs/musgo.webp" alt=""></div>
+        <div class="retrato" id="retrato"></div>
+        <div class="p-info">
+          <span class="p-linha"><b class="p-nome">@voce</b><span id="p-insig"></span></span>
+          <span class="p-titulo" id="p-titulo">Peregrina de Pharloom</span>
+        </div>
+        <div class="p-nums"><span><b>14</b>posts</span><span><b>212</b>rosários</span><span><b>6</b>regiões</span></div>
+      </div>
+      <div class="chips" id="abas-perfil" role="tablist">
+        <button class="chip" aria-pressed="true" data-t="capa">Capa</button><button class="chip" aria-pressed="false" data-t="moldura">Moldura</button><button class="chip" aria-pressed="false" data-t="titulo">Título</button><button class="chip" aria-pressed="false" data-t="insignia">Insígnia</button>
+      </div>
+      <div class="pecas" id="pecas"></div>
+    </div>
+    <div class="conquistas" id="conquistas"></div>
+  </div>
+</section>
+</main>
+
+<div class="aviso" id="aviso" role="status" aria-live="polite" hidden>
+  <svg class="orn" viewBox="0 0 600 120" aria-hidden="true"><use href="#t-agulha"/></svg>
+  <small>Conquista</small><b id="aviso-nome"></b><span id="aviso-premio"></span>
+</div>
+
+<div class="veu" id="veu" hidden>
+  <div class="feed moldura painel" role="dialog" aria-modal="true" aria-labelledby="feed-titulo">
+    <svg class="c tl orn" viewBox="0 0 230 185" aria-hidden="true"><use href="#canto-superior"/></svg>
+    <svg class="c tr orn" viewBox="0 0 230 185" aria-hidden="true"><use href="#canto-superior-dir"/></svg>
+    <svg class="c bl orn" viewBox="0 0 230 190" aria-hidden="true"><use href="#canto-inferior"/></svg>
+    <svg class="c br orn" viewBox="0 0 230 190" aria-hidden="true"><use href="#canto-inferior-dir"/></svg>
+    <div class="topo"><div><small id="feed-regiao"></small><h3 id="feed-titulo"></h3></div><button class="fechar" id="fechar" aria-label="Fechar">✕</button></div>
+    <div class="chips" id="feed-chips"></div>
+    <div class="lista" id="feed-lista"></div>
+    <div class="dicas"><span><span class="tecla">↵</span>Abrir</span><span><span class="tecla">Esc</span>Fechar</span></div>
+  </div>
+</div>
+
+<script>
+(function(){
+// brasas
+const cv=document.getElementById('brasas'),cx=cv.getContext('2d');
+const calma=matchMedia('(prefers-reduced-motion: reduce)').matches;
+let W,H,bs=[];
+function tam(){W=cv.width=cv.offsetWidth;H=cv.height=cv.offsetHeight}
+tam();addEventListener('resize',tam);
+for(let i=0;i<70;i++)bs.push({x:Math.random(),y:Math.random(),v:.0006+Math.random()*.0016,l:4+Math.random()*12,a:.25+Math.random()*.6,d:(Math.random()-.5)*.0006});
+function desenha(){
+  cx.clearRect(0,0,W,H);
+  for(const b of bs){
+    if(!calma){b.y-=b.v;b.x+=b.d+.0004;if(b.y<-.05){b.y=1.05;b.x=Math.random()}}
+    const x=b.x*W,y=b.y*H;
+    cx.strokeStyle=`rgba(242,${120+Math.round(b.a*60)},70,${b.a*(0.3+0.7*b.y)})`;cx.lineWidth=1.6;
+    cx.beginPath();cx.moveTo(x,y);cx.lineTo(x-b.l*.35,y+b.l);cx.stroke();
+  }
+  if(!calma)requestAnimationFrame(desenha);
+}
+desenha();
+
+// menu
+document.querySelectorAll('.menu button').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('.menu button').forEach(o=>o.setAttribute('aria-current','false'));b.setAttribute('aria-current','true');
+  if(b.textContent.includes('Explorar'))document.getElementById('mapa').scrollIntoView({behavior:calma?'auto':'smooth'});
+}));
+function chipsGrupo(el,cb){el.addEventListener('click',e=>{const c=e.target.closest('.chip');if(!c)return;el.querySelectorAll('.chip').forEach(o=>o.setAttribute('aria-pressed','false'));c.setAttribute('aria-pressed','true');cb&&cb(c.dataset.t)})}
+chipsGrupo(document.querySelector('[data-grupo="demo"]'));
+
+// dados
+const S1=1564/1400,S2=4096/1400;
+const R={
+ cradle:{nome:'The Cradle',cor:'#9aa0d8',b:[630,10,770,75],m:[640,50,780,150]},
+ mountfay:{nome:'Mount Fay',cor:'#7f9fd8',b:[85,55,315,280],m:[80,120,345,350]},
+ slab:{nome:'The Slab',cor:'#a8aeb6',b:[325,120,495,280],m:[340,210,460,360]},
+ citadel:{nome:'The Citadel',cor:'#d8b84a',b:[405,80,945,345],m:[480,140,960,420]},
+ ducts:{nome:'Putrified Ducts',cor:'#7ab0d0',b:[950,125,1300,195],m:[930,215,1290,300]},
+ bilewater:{nome:'Bilewater',cor:'#b8c870',b:[950,200,1255,410],m:[990,280,1230,500]},
+ karak:{nome:'Sands of Karak',cor:'#e07a9a',b:[90,272,380,375],m:[110,340,380,470]},
+ underworks:{nome:'Underworks',cor:'#a8aeb6',b:[475,285,940,440],m:[480,380,780,500]},
+ sinners:{nome:"Sinner's Road",cor:'#d09080',b:[812,375,1058,462],m:[840,480,1060,560]},
+ steps:{nome:'Blasted Steps',cor:'#d8aa70',b:[75,355,430,505],m:[110,470,330,590]},
+ shellwood:{nome:'Shellwood',cor:'#b8c870',b:[300,435,545,555],m:[380,520,640,640]},
+ bellhart:{nome:'Bellhart',cor:'#e8b060',b:[540,415,680,590],m:[560,560,680,650]},
+ greymoor:{nome:'Greymoor',cor:'#8ab0c0',b:[685,420,1135,560],m:[650,480,1110,630]},
+ verdania:{nome:'Verdania',cor:'#6ad090',b:[1115,435,1390,522],m:null},
+ wormways:{nome:'Wormways',cor:'#d0b8a0',b:[5,560,245,635],m:[40,640,320,720]},
+ bone:{nome:'Bone Bottom',cor:'#9cd07f',b:[70,560,385,740],m:[90,640,420,830]},
+ marrow:{nome:'The Marrow',cor:'#c0bab0',b:[355,600,640,690],m:[360,650,660,780]},
+ weavenest:{nome:'Weavenest Atla',cor:'#8090d0',b:[297,698,505,758],m:[330,770,500,840]},
+ hunters:{nome:"Hunter's March",cor:'#f07860',b:[595,567,938,620],m:[640,650,900,700]},
+ docks:{nome:'Deep Docks',cor:'#E8873C',b:[645,625,938,745],m:[650,670,950,870]},
+ farfields:{nome:'Far Fields',cor:'#c8d080',b:[810,528,1255,722],m:[820,640,1270,800]},
+ abyss:{nome:'The Abyss',cor:'#b0b0b0',b:[577,780,822,845],m:null}
+};
+const INS_AUT={lira:'musgo',fiapo:'chave',sinos:'sino',teceloa:'carretel'};
+const autores={lira:'L',teceloa:'T',agulharubra:'A',musgueiro:'M',sinos:'S',peregrino:'P',fiapo:'F'};
+const P=[
+ {id:1,t:'arte',a:'lira',q:'há 2 dias',r:48,titulo:'Hornet no musgo',img:'refs/musgo.webp',pos:'38% 70%'},
+ {id:2,t:'texto',a:'peregrino',q:'há 5 horas',r:12,txt:'Passei quarenta minutos achando que esse banco era só decoração. Não era.'},
+ {id:3,t:'audio',a:'sinos',q:'ontem',r:31,titulo:'Tema de Bone Bottom no violão',dur:'2:31'},
+ {id:4,t:'mod',a:'fiapo',q:'há 1 semana',r:77,titulo:'Mapa sempre aberto',dom:'nexusmods.com',info:'v1.2, 3,4 mil downloads'},
+ {id:5,t:'video',a:'musgueiro',q:'há 3 dias',r:20,titulo:'Todas as rotas até Bellhart sem mapa',img:'refs/forja.webp',pos:'50% 50%',dur:'12:48',dom:'youtube.com'},
+ {id:6,t:'arte',a:'teceloa',q:'há 4 dias',r:64,titulo:'Duelo na ponte',img:'refs/forja.webp',pos:'45% 60%'},
+ {id:7,t:'texto',a:'agulharubra',q:'há 6 horas',r:9,txt:'Alguém mais ouviu o sino tocar duas vezes aqui embaixo?'},
+ {id:8,t:'arte',a:'fiapo',q:'há 2 semanas',r:102,titulo:'Chegada nas docas',img:'refs/docas.webp',pos:'50% 85%'},
+ {id:9,t:'audio',a:'teceloa',q:'há 3 dias',r:15,titulo:'Docas, versão em piano lento',dur:'4:02'},
+ {id:10,t:'mod',a:'musgueiro',q:'há 1 mês',r:40,titulo:'Bancos com nome',dom:'github.com',info:'v0.9, código aberto'},
+ {id:11,t:'arte',a:'sinos',q:'há 1 dia',r:27,titulo:'Gaiola no musgo',img:'refs/musgo.webp',pos:'80% 60%'},
+ {id:12,t:'texto',a:'lira',q:'há 2 dias',r:33,txt:'Dica: o caminho de cima evita metade dos espinhos.'}
+];
+const pinos=[
+ {id:'p1',r:'bone',fx:.72,fy:.74,nome:'O banco de Bone Bottom',posts:[1,2,3,4,12,6,10],novo:true},
+ {id:'p2',r:'bone',fx:.3,fy:.86,nome:'A gaiola caída',posts:[11,7]},
+ {id:'p3',r:'docks',fx:.55,fy:.62,nome:'O cais da fornalha',posts:[8,9,6,5],novo:true},
+ {id:'p4',r:'bellhart',fx:.5,fy:.34,nome:'A praça do sino',posts:[5,7,3]},
+ {id:'p5',r:'citadel',fx:.35,fy:.6,nome:'O portão da cidadela',posts:[2]},
+ {id:'p6',r:'shellwood',fx:.3,fy:.42,nome:'A árvore oca',posts:[11,12]},
+ {id:'p7',r:'marrow',fx:.78,fy:.36,nome:'A descida',posts:[10]},
+ {id:'p8',r:'farfields',fx:.6,fy:.42,nome:'O moinho',posts:[9,1,4]},
+ {id:'p9',r:'greymoor',fx:.3,fy:.4,nome:'A torre cinza',posts:[6]},
+ {id:'p10',r:'bilewater',fx:.5,fy:.62,nome:'O cano rachado',posts:[7,9]},
+ {id:'p11',r:'karak',fx:.3,fy:.5,nome:'As dunas',posts:[4]}
+];
+const bx=(r,f)=>(r.b[0]+f*(r.b[2]-r.b[0]))*S1, by=(r,f)=>(r.b[1]+f*(r.b[3]-r.b[1]))*S1;
+
+// mapa
+function rng(s){return()=>{s=(s*16807)%2147483647;return(s-1)/2147483646}}
+const camada=document.getElementById('camada');
+let svg='<img src="refs/mapa-regioes.webp" alt="Mapa das regiões de Pharloom" width="1564" height="952" draggable="false"><svg class="zonas" viewBox="0 0 1564 952">';
+const ordem=Object.keys(R).sort((a,b)=>{const A=R[a].b,B=R[b].b;return (B[2]-B[0])*(B[3]-B[1])-(A[2]-A[0])*(A[3]-A[1])});
+for(const k of ordem){const b=R[k].b.map(v=>v*S1);
+  svg+=`<rect class="zona regiao-nome" data-r="${k}" x="${b[0].toFixed(0)}" y="${b[1].toFixed(0)}" width="${(b[2]-b[0]).toFixed(0)}" height="${(b[3]-b[1]).toFixed(0)}" rx="6" tabindex="0" role="button" aria-label="Entrar em ${R[k].nome}"/>`}
+svg+='</svg>';
+camada.innerHTML=svg;
+let total=0;
+for(const p of pinos){total+=p.posts.length;const g=R[p.r];
+  const b=document.createElement('button');b.className='pino'+(p.novo?' novo':'');b.style.left=bx(g,p.fx)+'px';b.style.top=by(g,p.fy)+'px';
+  b.setAttribute('aria-label',`${p.nome}, ${g.nome}, ${p.posts.length} ${p.posts.length>1?'posts':'post'}`);
+  b.innerHTML=`<svg viewBox="0 0 30 52"><use href="#agulha"/></svg>${p.posts.length>1?`<span class="n">${p.posts.length}</span>`:''}`;
+  b.addEventListener('click',e=>{if(moveu)return;abrir(p,b)});camada.appendChild(b)}
+document.getElementById('hud-n').textContent=total;
+
+const mapa=document.getElementById('mapa-el');
+let esc=1,tx=0,ty=0;
+function limitar(){const W=mapa.clientWidth,H=mapa.clientHeight;const mw=1564*esc,mh=952*esc;
+  tx=mw<W?(W-mw)/2:Math.min(0,Math.max(W-mw,tx));ty=mh<H?(H-mh)/2:Math.min(0,Math.max(H-mh,ty));
+  camada.style.transform=`translate(${tx}px,${ty}px) scale(${esc})`}
+function centrar(x,y){tx=mapa.clientWidth/2-x*esc;ty=mapa.clientHeight/2-y*esc;limitar()}
+esc=Math.max(.5,Math.min(1,mapa.clientWidth/1564));centrar(782,476);
+addEventListener('resize',limitar);
+let arr=null,moveu=false;
+mapa.addEventListener('pointerdown',e=>{if(e.target.closest('.zoom'))return;arr={x:e.clientX,y:e.clientY,tx,ty};moveu=false});
+addEventListener('pointermove',e=>{if(!arr)return;const dx=e.clientX-arr.x,dy=e.clientY-arr.y;if(Math.abs(dx)+Math.abs(dy)>4){moveu=true;mapa.classList.add('arrastando')}tx=arr.tx+dx;ty=arr.ty+dy;limitar()});
+addEventListener('pointerup',()=>{arr=null;mapa.classList.remove('arrastando');setTimeout(()=>moveu=false,0)});
+function zoom(f){const cxm=mapa.clientWidth/2,cym=mapa.clientHeight/2;const mx=(cxm-tx)/esc,my=(cym-ty)/esc;esc=Math.max(.45,Math.min(1.6,esc*f));tx=cxm-mx*esc;ty=cym-my*esc;limitar()}
+document.getElementById('zmais').onclick=()=>zoom(1.2);document.getElementById('zmenos').onclick=()=>zoom(1/1.2);
+
+const cart=document.getElementById('cartela');let tc;
+function cartela(k){document.getElementById('cartela-nome').textContent=R[k].nome.toUpperCase();cart.classList.add('ver');clearTimeout(tc);tc=setTimeout(()=>cart.classList.remove('ver'),2200)}
+function irPara(k){entrar(k,true);document.getElementById('explorar').scrollIntoView({behavior:calma?'auto':'smooth'});setTimeout(()=>micro.focus({preventScroll:true}),calma?0:500)}
+camada.addEventListener('click',e=>{const t=e.target.closest('.regiao-nome');if(t&&!moveu)irPara(t.dataset.r)});
+camada.addEventListener('keydown',e=>{const t=e.target.closest('.regiao-nome');if(t&&(e.key==='Enter'||e.key===' ')){e.preventDefault();irPara(t.dataset.r)}});
+
+// ---------- insígnias ----------
+const INS={
+ agulha:`<path d="M24 2 L45 24 L24 46 L3 24Z" fill="#3a1416" stroke="#F3EEE8" stroke-width="1.6"/><path d="M24 8 L39 24 L24 40 L9 24Z" fill="#5a1d20"/><path d="M24 2 L45 24 L24 24Z" fill="#fff" opacity=".07"/>
+  <path d="M13 36 L33 11 Q35.5 8.5 34.6 12 L15 37Z" fill="#F3EEE8"/><ellipse cx="33.4" cy="11.6" rx=".6" ry="1.8" transform="rotate(40 33.4 11.6)" fill="#3a1416"/>
+  <path d="M33.5 12 C 40 16, 30 24, 24 21 S 14 26, 18 32" fill="none" stroke="#E8636A" stroke-width="1.8" stroke-linecap="round"/>`,
+ carretel:`<circle cx="24" cy="24" r="21" fill="#2a1a12" stroke="#d8b46a" stroke-width="2"/><circle cx="24" cy="24" r="16.5" fill="none" stroke="#d8b46a" stroke-opacity=".45"/>
+  ${[...Array(10)].map((_,i)=>{const a=i/10*Math.PI*2;return `<circle cx="${(24+Math.cos(a)*19).toFixed(1)}" cy="${(24+Math.sin(a)*19).toFixed(1)}" r="1" fill="#d8b46a"/>`}).join('')}
+  <path d="M15 12h18v4H15zM15 32h18v4H15z" fill="#d8b46a"/><path d="M18 16h12v16H18z" fill="#F3EEE8"/><path d="M18 19h12v1.4H18zM18 23.3h12v1.4H18zM18 27.6h12v1.4H18z" fill="#C8323A"/>`,
+ sino:`<path d="M6 46 V20 A18 18 0 0 1 42 20 V46Z" fill="#2a1a12" stroke="#d8b46a" stroke-width="2"/><path d="M10 46 V21 A14 14 0 0 1 38 21 V46" fill="none" stroke="#d8b46a" stroke-opacity=".4"/>
+  <path d="M15 35 Q15 16 24 16 Q33 16 33 35 L36 38 L12 38Z" fill="#e8c27a"/><path d="M24 16 Q33 16 33 35 L36 38 L28 38 Q30 22 24 16Z" fill="#000" opacity=".18"/><circle cx="24" cy="41" r="2.6" fill="#e8c27a"/><circle cx="24" cy="13" r="2" fill="#e8c27a"/>`,
+ rosario:`<circle cx="24" cy="24" r="21" fill="#1c1210" stroke="#F3EEE8" stroke-width="1.4" stroke-opacity=".6"/>
+  ${[...Array(11)].map((_,i)=>{const a=-Math.PI/2+i/11*Math.PI*2;return `<circle cx="${(24+Math.cos(a)*14).toFixed(1)}" cy="${(24+Math.sin(a)*14).toFixed(1)}" r="3.1" fill="#F3EEE8"/><circle cx="${(23+Math.cos(a)*14).toFixed(1)}" cy="${(23+Math.sin(a)*14).toFixed(1)}" r="1" fill="#fff"/>`}).join('')}
+  <circle cx="24" cy="24" r="5.5" fill="#C8323A"/><circle cx="22.6" cy="22.6" r="1.6" fill="#fff" opacity=".5"/>`,
+ chave:`<path d="M24 2 L43 13 V35 L24 46 L5 35 V13Z" fill="#261A18" stroke="#F3EEE8" stroke-width="1.6"/><path d="M24 2 L43 13 V24 L24 24 L5 24 V13Z" fill="#fff" opacity=".05"/>
+  <path d="M31 13.5a6 6 0 0 0-8 7.8L13.5 31l3.4 3.4 9.6-9.6a6 6 0 0 0 7.8-8l-3.6 3.6-3.2-.8-.8-3.2z" fill="#F3EEE8"/>`,
+ musgo:`<circle cx="24" cy="24" r="21" fill="#102817" stroke="#8CC06F" stroke-width="1.8"/><path d="M8 34 Q24 28 40 34 L40 38 Q24 32 8 38Z" fill="#376742"/>
+  <path d="M24 34 C 24 26, 23 20, 24 14" fill="none" stroke="#8CC06F" stroke-width="2" stroke-linecap="round"/><path d="M24 22 C 16 22, 13 15, 14 11 C 20 11, 24 15, 24 22Z" fill="#8CC06F"/><path d="M24 18 C 31 18, 35 12, 34 8 C 28 8, 24 12, 24 18Z" fill="#b6e094"/>
+  <circle cx="35" cy="22" r="1.4" fill="#d8f0a0"/><circle cx="13" cy="27" r="1" fill="#d8f0a0"/>`
+};
+function insignia(id,nome){return `<span class="insig" title="${nome||''}"><svg viewBox="0 0 48 48" aria-hidden="true">${INS[id]||''}</svg></span>`}
+
+// posts
+const rot={arte:'Arte',mod:'Mod',texto:'Texto',video:'Vídeo',audio:'Áudio'};
+const ic={
+ mod:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4z"/></svg>',
+ play:'<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4l13 8-13 8z"/></svg>',
+ pausa:'<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6zM14 4h4v16h-4z"/></svg>'
+};
+function onda(id){const r=rng(id*97);let s='';for(let i=0;i<42;i++)s+=`<i style="height:${(18+r()*82).toFixed(0)}%"></i>`;return s}
+function html(p){
+  let meio='';
+  if(p.t==='arte')meio=`<div class="titulo">${p.titulo}</div><img src="${p.img}" alt="${p.titulo}" style="object-position:${p.pos}" loading="lazy">`;
+  if(p.t==='texto')meio=`<p class="lore">${p.txt}</p>`;
+  if(p.t==='mod')meio=`<a class="link" href="https://${p.dom}" target="_blank" rel="noopener"><span class="ic">${ic.mod}</span><span><b>${p.titulo}</b><small>${p.dom}, ${p.info}</small></span></a>`;
+  if(p.t==='video')meio=`<div class="titulo">${p.titulo}</div><a class="video" href="https://${p.dom}" target="_blank" rel="noopener" aria-label="Assistir ${p.titulo} em ${p.dom}"><img src="${p.img}" alt="" style="object-position:${p.pos}" loading="lazy"><span class="play">${ic.play}</span><span class="dur">${p.dur}</span></a>`;
+  if(p.t==='audio')meio=`<div class="titulo">${p.titulo}</div><div class="audio" data-id="${p.id}"><button aria-label="Tocar">${ic.play}</button><div class="onda-a">${onda(p.id)}</div><time>${p.dur}</time></div>`;
+  return `<article class="post" data-t="${p.t}"><div class="quem"><span class="av">${autores[p.a]}</span><span class="qm"><span class="nm"><b>@${p.a}</b>${INS_AUT[p.a]?insignia(INS_AUT[p.a]):''}</span><small>${p.q}</small></span><span class="tag">${rot[p.t]}</span></div>${meio}
+  <div class="rodape-post"><button class="rosario" aria-pressed="false" data-r="${p.r}"><svg viewBox="0 0 22 14"><use href="#contas"/></svg><span>${p.r}</span><span class="sr">rosários</span></button><span>${p.t==='arte'?'Ver inteira':p.t==='mod'||p.t==='video'?'Abrir link':''}</span></div></article>`;
+}
+document.addEventListener('click',e=>{
+  const r=e.target.closest('.rosario');if(r){const on=r.getAttribute('aria-pressed')!=='true';r.setAttribute('aria-pressed',on);r.querySelector('span').textContent=+r.dataset.r+(on?1:0);avancar('mecenas',on?1:-1);return}
+  const a=e.target.closest('.audio button');if(a){const box=a.parentElement;const tocando=box.classList.toggle('tocando');a.innerHTML=tocando?ic.pausa:ic.play;a.setAttribute('aria-label',tocando?'Pausar':'Tocar');
+    const bars=[...box.querySelectorAll('.onda-a i')];clearInterval(box._t);if(tocando){let i=bars.findIndex(b=>!b.classList.contains('ok'));if(i<0){bars.forEach(b=>b.classList.remove('ok'));i=0}box._t=setInterval(()=>{if(i>=bars.length){clearInterval(box._t);box.classList.remove('tocando');a.innerHTML=ic.play;a.setAttribute('aria-label','Tocar');avancar('coral');return}bars[i++].classList.add('ok')},120)}}
+});
+document.getElementById('tipos-post').innerHTML=[1,4,2,5,3].map(id=>html(P.find(p=>p.id===id))).join('');
+
+const veu=document.getElementById('veu'),lista=document.getElementById('feed-lista'),fchips=document.getElementById('feed-chips');let origem=null,atual=[];
+function filtra(t){lista.innerHTML=atual.filter(p=>!t||t==='tudo'||p.t===t).map(html).join('');lista.scrollTop=0}
+function abrir(p,b){origem=b;atual=p.posts.map(id=>P.find(x=>x.id===id));
+  document.getElementById('feed-regiao').textContent=R[p.r].nome;document.getElementById('feed-regiao').style.color=R[p.r].cor;
+  document.getElementById('feed-titulo').textContent=p.nome;
+  const tipos=[...new Set(atual.map(x=>x.t))];
+  fchips.innerHTML=atual.length>1?`<button class="chip" aria-pressed="true" data-t="tudo">Tudo ${atual.length}</button>`+tipos.map(t=>`<button class="chip" aria-pressed="false" data-t="${t}">${rot[t]} ${atual.filter(x=>x.t===t).length}</button>`).join(''):'';
+  fchips.hidden=atual.length<2;
+  filtra('tudo');veu.hidden=false;document.getElementById('fechar').focus()}
+chipsGrupo(fchips,filtra);
+function fechar(){veu.hidden=true;lista.querySelectorAll('.audio').forEach(a=>clearInterval(a._t));origem&&origem.focus()}
+document.getElementById('fechar').onclick=fechar;
+veu.addEventListener('click',e=>{if(e.target===veu)fechar()});
+addEventListener('keydown',e=>{if(e.key==='Escape'&&!veu.hidden)fechar()});
+
+
+// ---------- conquistas ----------
+const CQ=[
+ {id:'primeira',nome:'Primeira agulha',desc:'Publicar seu primeiro post.',meta:1,v:1,premio:'o título Aprendiz de agulha',ic:'agulha'},
+ {id:'peregrina',nome:'Peregrina',desc:'Entrar em todas as regiões do mapa.',meta:11,v:11,premio:'o título Peregrina de Pharloom',ic:'mapa'},
+ {id:'cartografa',nome:'Cartógrafa',desc:'Ver 3 pontos diferentes andando no mapa local.',meta:3,v:0,premio:'a capa Brasas, o título Cartógrafa e os chifres Coroa',ic:'mapa'},
+ {id:'mecenas',nome:'Mecenas',desc:'Dar 100 rosários em posts de outras pessoas.',meta:100,v:97,premio:'a moldura Sino',ic:'rosario'},
+ {id:'coral',nome:'Coral de Bellhart',desc:'Ouvir 10 áudios até o fim.',meta:10,v:9,premio:'a insígnia Sino de Bellhart, o título Voz de Bellhart e o sino na mão',ic:'sino'},
+ {id:'hornet',nome:'Fio vermelho',desc:'Ver 50 posts com a marca Hornet.',meta:50,v:31,premio:'a moldura Fio vermelho e a capa carmim',ic:'agulha'},
+ {id:'mecanico',nome:'Mão de mecânico',desc:'Abrir 20 links de mod.',meta:20,v:12,premio:'a insígnia Chave de mecânico',ic:'chave'}
+];
+const feita=id=>{const c=CQ.find(c=>c.id===id);return c&&c.v>=c.meta};
+const ICS={
+ agulha:'<svg viewBox="0 0 24 24" width="20" height="20"><path d="M5 20L17.5 5.5Q20 3 19 6.5L6.5 21Z" fill="currentColor"/><ellipse cx="17.2" cy="6.6" rx=".7" ry="1.6" transform="rotate(40 17.2 6.6)" fill="#0C0706"/></svg>',
+ mapa:'<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6l6-2 6 2 6-2v14l-6 2-6-2-6 2z M9 4v14 M15 6v14"/></svg>',
+ rosario:'<svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><circle cx="6" cy="12" r="3.4"/><circle cx="12" cy="12" r="3.4"/><circle cx="18" cy="12" r="3.4"/></svg>',
+ sino:'<svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M5 17q1-1 1-6a6 6 0 0 1 12 0q0 5 1 6z"/><circle cx="12" cy="20" r="2"/><circle cx="12" cy="3.5" r="1.5"/></svg>',
+ chave:'<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4z"/></svg>',
+ carretel:'<svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M5 3h14v3H5zM5 18h14v3H5zM8 6h8v12H8z"/><path d="M9 9h6v1H9zM9 12h6v1H9zM9 15h6v1H9z" fill="#0C0706"/></svg>',
+ cadeado:'<svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="#BFB2AC" stroke-width="2.4"><rect x="5" y="11" width="14" height="10"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>'
+};
+let timerAviso;
+function avisar(c){const el=document.getElementById('aviso');document.getElementById('aviso-nome').textContent=c.nome;document.getElementById('aviso-premio').textContent='Destravou '+c.premio+'.';
+  el.hidden=false;el.style.animation='none';el.offsetHeight;el.style.animation='';clearTimeout(timerAviso);timerAviso=setTimeout(()=>el.hidden=true,4800)}
+function avancar(id,n=1){const c=CQ.find(c=>c.id===id);if(!c)return;const antes=c.v>=c.meta;if(antes&&n<0)return;c.v=Math.max(0,Math.min(c.meta,c.v+n));
+  if(!antes&&c.v>=c.meta){avisar(c);desenharOpcoes();desenharPecas()}desenharConquistas()}
+function desenharConquistas(){document.getElementById('conquistas').innerHTML=CQ.map(c=>{const ok=c.v>=c.meta;return `<div class="cq${ok?' feita':''}">
+  <svg class="kc a orn" viewBox="0 0 120 120" aria-hidden="true"><use href="#k-fio"/></svg><svg class="kc b orn" viewBox="0 0 120 120" aria-hidden="true"><use href="#k-fio"/></svg>
+  <span class="ic">${ICS[c.ic]}</span><div><h3>${c.nome}</h3><p>${c.desc}</p>
+  <div class="fio"><div class="trilho"><i style="width:${(c.v/c.meta*100).toFixed(1)}%"></i></div><span>${c.v} de ${c.meta}</span></div>
+  <div class="premio">${ok?'Destravado: ':'Destrava '}${c.premio}</div></div></div>`}).join('')}
+
+// ---------- peregrino ----------
+const CORES={vinho:'#7a2a2a',musgo:'#3f6b44',ferrugem:'#b8612e',cinza:'#6f6a66',osso:'#d8cfc6',noite:'#2a2f45',carmim:'#C8323A'};
+const OPC={
+ mascara:{rot:'Máscara',ops:[['oval','Oval'],['gota','Gota'],['escudo','Escudo'],['lua','Lua']]},
+ chifres:{rot:'Na cabeça',ops:[['nenhum','Nada'],['antenas','Antenas'],['curvos','Curvos'],['capuz','Capuz'],['coroa','Coroa','cartografa']]},
+ olhos:{rot:'Olhos',ops:[['redondos','Redondos'],['fendas','Fendas'],['um','Um só']]},
+ capa:{rot:'Capa',cor:true,ops:[['vinho','Vinho'],['musgo','Musgo'],['ferrugem','Ferrugem'],['cinza','Cinza'],['osso','Osso'],['noite','Noite'],['carmim','Carmim','hornet']]},
+ item:{rot:'Na mão',ops:[['nenhum','Nada'],['agulha','Agulha'],['lanterna','Lanterna'],['sino','Sino','coral']]}
+};
+let eu={mascara:'gota',chifres:'antenas',olhos:'redondos',capa:'ferrugem',item:'lanterna'};
+try{const s=JSON.parse(localStorage.getItem('peregrino')||'null');if(s)eu=Object.assign(eu,s)}catch(e){}
+function guardar(){try{localStorage.setItem('peregrino',JSON.stringify(eu))}catch(e){}}
+function avatarSVG(s,vb){
+  const capa=CORES[s.capa]||CORES.vinho,O='#F3EEE8',E='#0C0706';let h='';
+  if(s.item==='lanterna')h+=`<defs><radialGradient id="luz-l"><stop offset="0" stop-color="#F2AA57" stop-opacity=".45"/><stop offset="1" stop-color="#F2AA57" stop-opacity="0"/></radialGradient></defs><circle cx="48" cy="66" r="14" fill="url(#luz-l)"/>`;
+  if(s.chifres==='capuz')h+=`<path d="M30 0 C 52 12, 50 40, 46 46 L14 46 C10 40, 8 12, 30 0Z" fill="${capa}"/><path d="M30 0 C 52 12, 50 40, 46 46 L42 46 C 46 30, 40 12, 30 0Z" fill="#000" opacity=".2"/>`;
+  h+=`<g class="pe"><path d="M25.5 70 L24 89" stroke="#1a0f0e" stroke-width="3.6" stroke-linecap="round"/></g><g class="pd"><path d="M34.5 70 L36 89" stroke="#1a0f0e" stroke-width="3.6" stroke-linecap="round"/></g><g class="corpo">`;
+  h+=`<path d="M30 33 C 17 37, 13 57, 10 75 L16 71 L20 77 L25 71 L30 77 L35 71 L40 77 L44 71 L50 75 C 47 57, 43 37, 30 33Z" fill="${capa}"/>`;
+  h+=`<path d="M30 35 C 24 40, 21 55, 18 70 L21 72 C 23 58, 25 45, 30 35Z" fill="#fff" opacity=".1"/><path d="M30 35 C 38 42, 42 56, 44 71 L47 73 C 45 57, 40 40, 30 35Z" fill="#000" opacity=".22"/>`;
+  if(s.chifres==='antenas')h+=`<g fill="none" stroke="${O}" stroke-width="1.8" stroke-linecap="round"><path d="M26 12 C 24 2, 17 -1, 14 3"/><path d="M34 12 C 36 2, 43 -1, 46 3"/></g><circle cx="14.5" cy="3.5" r="1.8" fill="${O}"/><circle cx="45.5" cy="3.5" r="1.8" fill="${O}"/>`;
+  if(s.chifres==='curvos')h+=`<path d="M20 16 C 8 13, 5 2, 13 -1 C 10 5, 13 10, 22 11Z M40 16 C 52 13, 55 2, 47 -1 C 50 5, 47 10, 38 11Z" fill="${O}"/>`;
+  if(s.chifres==='coroa')h+=`<path d="M21 13 L22.5 -1 L27 10Z M27.5 9 L30 -6 L32.5 9Z M33 10 L37.5 -1 L39 13Z" fill="${O}"/>`;
+  const m={oval:`<ellipse cx="30" cy="22" rx="12" ry="14"/>`,gota:`<path d="M30 4 C 44 16, 43 36, 30 36 C 17 36, 16 16, 30 4Z"/>`,
+    escudo:`<path d="M17 10 H43 V22 C43 31 37 35 30 38 C23 35 17 31 17 22Z"/>`,lua:`<ellipse cx="30" cy="24" rx="15.5" ry="11"/>`}[s.mascara];
+  h+=`<g fill="${O}">${m}</g>`;
+  const ey=s.mascara==='lua'?25:24;
+  h+={redondos:`<ellipse cx="25.3" cy="${ey}" rx="2.6" ry="3.9" fill="${E}"/><ellipse cx="34.7" cy="${ey}" rx="2.6" ry="3.9" fill="${E}"/>`,
+      fendas:`<path d="M20.5 ${ey-2} L28.5 ${ey+.6} L21 ${ey+1.6}Z M39.5 ${ey-2} L31.5 ${ey+.6} L39 ${ey+1.6}Z" fill="${E}"/>`,
+      um:`<ellipse cx="30" cy="${ey}" rx="4" ry="5.2" fill="${E}"/>`}[s.olhos];
+  if(s.item==='agulha')h+=`<path d="M45 57 L58 26 Q59.5 24 59.3 26.8 L47.2 58Z" fill="#d6ccc2"/>`;
+  if(s.item==='lanterna')h+=`<path d="M46 55 L48 61" stroke="#1a0f0e" stroke-width="1.4"/><path d="M44.5 61 h7 l-1 10 h-5z" fill="#3a2a20"/><rect x="46" y="62.5" width="4" height="7" fill="#F2AA57"/>`;
+  if(s.item==='sino')h+=`<path d="M46 55 L48 60" stroke="#1a0f0e" stroke-width="1.4"/><path d="M43 70 q0-10 5-10 q5 0 5 10z" fill="#c9a25a"/><circle cx="48" cy="72" r="1.6" fill="#c9a25a"/>`;
+  h+='</g>';
+  return `<svg viewBox="${vb||'0 -8 60 100'}" aria-hidden="true">${h}</svg>`;
+}
+function desenharOpcoes(){
+  let h='';
+  for(const k in OPC){const g=OPC[k];h+=`<div class="grupo"><h3>${g.rot}</h3><div class="ops">`;
+    for(const [id,nome,tr] of g.ops){const tranc=tr&&!feita(tr);const sel=eu[k]===id;
+      const prev=g.cor?`<i style="background:${CORES[id]}"></i>`:(k==='olhos'||k==='item'?nome:avatarSVG(Object.assign({},eu,{[k]:id}),k==='mascara'||k==='chifres'?'6 -8 48 50':undefined));
+      h+=`<button class="op${g.cor?' cor':''}${tranc?' trancada':''}" data-k="${k}" data-id="${id}" ${tranc?`data-tr="${tr}" aria-disabled="true"`:''} aria-pressed="${sel}" aria-label="${g.rot}: ${nome}${tranc?', trancada':''}" title="${nome}">${prev}${tranc?`<span class="cad">${ICS.cadeado}</span>`:''}</button>`}
+    h+=`</div></div>`}
+  h+=`<p class="dica-tranca" id="dica-tranca" aria-live="polite"></p>`;
+  document.getElementById('opcoes').innerHTML=h;
+  document.getElementById('vit-av').innerHTML=avatarSVG(eu);
+  if(typeof desenharEu==='function')desenharEu();
+  if(typeof desenharCartao==='function')desenharCartao();
+}
+document.getElementById('opcoes').addEventListener('click',e=>{const b=e.target.closest('.op');if(!b)return;
+  if(b.dataset.tr){const c=CQ.find(c=>c.id===b.dataset.tr);document.getElementById('dica-tranca').textContent=`Destrave com a conquista ${c.nome}: ${c.desc.toLowerCase()}`;return}
+  eu[b.dataset.k]=b.dataset.id;guardar();desenharOpcoes()});
+document.getElementById('sortear').onclick=()=>{for(const k in OPC){const ok=OPC[k].ops.filter(o=>!o[2]||feita(o[2]));eu[k]=ok[Math.floor(Math.random()*ok.length)][0]}guardar();desenharOpcoes()};
+document.getElementById('ir-mapa').onclick=()=>{document.getElementById('explorar').scrollIntoView({behavior:calma?'auto':'smooth'});setTimeout(()=>micro.focus({preventScroll:true}),calma?0:500)};
+
+// ---------- mapa local ----------
+const micro=document.getElementById('micro'),mcam=document.getElementById('m-camada'),sobre=document.getElementById('m-sobre');
+let mesc=.5,mtx=0,mty=0,regAtual='bone',pois=[],euPos={x:0,y:0},elEu=null,avisoEl=null,perto_atual=null,andando=false;
+const vistos=new Set();
+const caixaM=k=>{const m=R[k].m||[0,0,1400,1040];return m.map(v=>v*S2)};
+function miniAv(s){return avatarSVG(s,'9 -4 42 42')}
+function mRender(){mcam.style.transform=`translate(${mtx}px,${mty}px) scale(${mesc})`;
+  for(const el of sobre.children){if(el._x==null)continue;el.style.left=(mtx+el._x*mesc)+'px';el.style.top=(mty+el._y*mesc)+'px'}
+  perto_atual=null;let md=140;for(const q of pois){const d=Math.hypot(q.x-euPos.x,q.y-euPos.y);if(d<md){md=d;perto_atual=q}}
+  if(avisoEl){avisoEl.hidden=!perto_atual||andando;if(perto_atual){avisoEl._x=perto_atual.x;avisoEl._y=perto_atual.y;avisoEl.style.left=(mtx+perto_atual.x*mesc)+'px';avisoEl.style.top=(mty+perto_atual.y*mesc)+'px';avisoEl.lastChild.textContent=`Ver ${perto_atual.posts.length} posts`}}}
+function mLimitar(){const W=micro.clientWidth,H=micro.clientHeight;const mw=4096*mesc,mh=3043*mesc;
+  mtx=mw<W?(W-mw)/2:Math.min(0,Math.max(W-mw,mtx));mty=mh<H?(H-mh)/2:Math.min(0,Math.max(H-mh,mty));mRender()}
+function enquadrar(){const c=caixaM(regAtual),W=micro.clientWidth,H=micro.clientHeight;const w=c[2]-c[0],h=c[3]-c[1];
+  mesc=Math.min(1.1,Math.min(W/w,H/h)*.88);mtx=W/2-(c[0]+w/2)*mesc;mty=H/2-(c[1]+h/2)*mesc;mLimitar()}
+function mZoom(f){const cx=micro.clientWidth/2,cy=micro.clientHeight/2;const x=(cx-mtx)/mesc,y=(cy-mty)/mesc;mesc=Math.max(.18,Math.min(1.4,mesc*f));mtx=cx-x*mesc;mty=cy-y*mesc;mLimitar()}
+function por(el,x,y){el._x=x;el._y=y;sobre.appendChild(el);return el}
+// encaixa um ponto na sala mais próxima (pixel aceso do mapa)
+let mascara=null;const MF=8;
+(function(){const im=new Image();im.onload=()=>{const c=document.createElement('canvas');c.width=Math.ceil(4096/MF);c.height=Math.ceil(3043/MF);const x=c.getContext('2d');x.drawImage(im,0,0,c.width,c.height);
+  try{mascara={w:c.width,h:c.height,d:x.getImageData(0,0,c.width,c.height).data};construir()}catch(e){}};im.src='refs/mapa-salas.webp'})();
+function aceso(i,j){if(!mascara||i<0||j<0||i>=mascara.w||j>=mascara.h)return false;const k=(j*mascara.w+i)*4,d=mascara.d;return d[k]+d[k+1]+d[k+2]>120}
+function encaixar(x,y){if(!mascara)return[x,y];const i0=Math.round(x/MF),j0=Math.round(y/MF);
+  for(let r=0;r<60;r++)for(let di=-r;di<=r;di++)for(const dj of [-r,r]){if(aceso(i0+di,j0+dj))return[(i0+di)*MF,(j0+dj)*MF];if(aceso(i0+dj,j0+di))return[(i0+dj)*MF,(j0+di)*MF]}
+  return[x,y]}
+function construir(){
+  const g=R[regAtual],c=caixaM(regAtual),rnd=rng(Object.keys(R).indexOf(regAtual)*31+5);
+  document.getElementById('m-reg').textContent=g.nome;const rc=document.getElementById('m-reg-cor');rc.style.color=g.cor;
+  sobre.innerHTML='';
+  const meus=pinos.filter(q=>q.r===regAtual);
+  const extras=[{nome:'A parede pintada',posts:[1,6,8,11]},{nome:'O poste de recados',posts:[2,7,12]},{nome:'O sino velho',posts:[3,9]}];
+  const lista=meus.map(q=>({...q})).concat(extras.map(q=>({...q,fx:.15+rnd()*.7,fy:.2+rnd()*.6}))).slice(0,4);
+  pois=lista.map(q=>{const [x,y]=encaixar(c[0]+q.fx*(c[2]-c[0]),c[1]+q.fy*(c[3]-c[1]));return {id:regAtual+':'+q.nome,r:regAtual,nome:q.nome,posts:q.posts,x,y}});
+  for(const q of pois){const b=document.createElement('button');b.className='pino'+(vistos.has(q.id)?' visto':'');
+    b.setAttribute('aria-label',`${q.nome}, ${q.posts.length} posts`);
+    b.innerHTML=`<svg viewBox="0 0 30 52"><use href="#agulha"/></svg><span class="n">${q.posts.length}</span><span class="nm">${q.nome}</span>`;
+    b.addEventListener('click',e=>{e.stopPropagation();if(mMoveu)return;irAte(q.x,q.y+10,()=>abrirPoi(q))});q.el=por(b,q.x,q.y)}
+  const gente=[{n:'@lira',s:{mascara:'oval',chifres:'curvos',olhos:'fendas',capa:'musgo',item:'agulha'}},{n:'@sinos',s:{mascara:'lua',chifres:'nenhum',olhos:'um',capa:'osso',item:'sino'}}];
+  gente.forEach((p,i)=>{const q=pois[i%pois.length];const [x,y]=encaixar(q.x+(i?-90:90),q.y);const m=document.createElement('div');m.className='marca outro';m.innerHTML=miniAv(p.s);por(m,x,y);
+    const n=document.createElement('div');n.className='marca-nome';n.textContent=p.n;por(n,x,y)});
+  {const [x,y]=encaixar(c[0]+(c[2]-c[0])*.12,c[1]+(c[3]-c[1])*.55);euPos={x,y}}
+  elEu=document.createElement('div');elEu.className='marca eu';por(elEu,euPos.x,euPos.y);desenharEu();
+  avisoEl=document.createElement('div');avisoEl.className='aviso-poi';avisoEl.hidden=true;avisoEl.innerHTML='<span class="tecla">↵</span><span></span>';sobre.appendChild(avisoEl);
+  enquadrar();progresso();
+}
+function desenharEu(){if(elEu)elEu.innerHTML=miniAv(eu)}
+let tw=null;
+function irAte(x,y,cb){cancelAnimationFrame(tw);[x,y]=encaixar(x,y);const x0=euPos.x,y0=euPos.y,d=Math.hypot(x-x0,y-y0),dur=calma?0:Math.max(250,Math.min(1100,d*1.4)),t0=performance.now();
+  andando=true;elEu.classList.add('andando');
+  const f=t=>{const k=dur?Math.min(1,(t-t0)/dur):1,e=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2;euPos.x=x0+(x-x0)*e;euPos.y=y0+(y-y0)*e;elEu._x=euPos.x;elEu._y=euPos.y;
+    if(k<1){mRender();tw=requestAnimationFrame(f)}else{andando=false;elEu.classList.remove('andando');mRender();cb&&cb()}};
+  tw=requestAnimationFrame(f)}
+function progresso(){const n=pois.filter(q=>vistos.has(q.id)).length;document.getElementById('m-prog').textContent=`${n} de ${pois.length} pontos vistos`}
+function abrirPoi(q){if(!vistos.has(q.id)){vistos.add(q.id);q.el.classList.add('visto');avancar('cartografa');progresso()}abrir(q,q.el)}
+function entrar(k,comCartela){regAtual=k;construir();if(comCartela)setTimeout(()=>cartela(k),calma?0:450)}
+let marr=null,mMoveu=false;
+micro.addEventListener('pointerdown',e=>{if(e.target.closest('button'))return;marr={x:e.clientX,y:e.clientY,tx:mtx,ty:mty};mMoveu=false});
+addEventListener('pointermove',e=>{if(!marr)return;const dx=e.clientX-marr.x,dy=e.clientY-marr.y;if(Math.abs(dx)+Math.abs(dy)>4){mMoveu=true;micro.classList.add('arrastando')}mtx=marr.tx+dx;mty=marr.ty+dy;mLimitar()});
+addEventListener('pointerup',e=>{if(marr&&!mMoveu&&!e.target.closest('button')&&micro.contains(e.target)){const r=micro.getBoundingClientRect();irAte((e.clientX-r.left-mtx)/mesc,(e.clientY-r.top-mty)/mesc);micro.focus({preventScroll:true})}
+  marr=null;micro.classList.remove('arrastando');setTimeout(()=>mMoveu=false,0)});
+micro.addEventListener('keydown',e=>{if(!veu.hidden)return;const k=e.key.toLowerCase(),p=60;
+  const mv={arrowleft:[-p,0],a:[-p,0],arrowright:[p,0],d:[p,0],arrowup:[0,-p],w:[0,-p],arrowdown:[0,p],s:[0,p]}[k];
+  if(mv){e.preventDefault();irAte(euPos.x+mv[0],euPos.y+mv[1]);return}
+  if(k==='enter'&&perto_atual){e.preventDefault();abrirPoi(perto_atual)}});
+document.getElementById('mz-mais').onclick=()=>mZoom(1.25);document.getElementById('mz-menos').onclick=()=>mZoom(1/1.25);
+document.getElementById('m-viajar').onclick=e=>{e.stopPropagation();document.getElementById('mapa').scrollIntoView({behavior:calma?'auto':'smooth'})};
+addEventListener('resize',enquadrar);
+entrar('bone',false);
+let viuCartela=false;new IntersectionObserver(es=>{if(es[0].isIntersecting&&!viuCartela){viuCartela=true;setTimeout(()=>cartela(regAtual),300)}},{threshold:.6}).observe(micro);
+
+// ---------- perfil ----------
+const PECAS={
+ capa:[{id:'musgo',nome:'Musgo',img:'refs/musgo.webp'},{id:'forja',nome:'Forja',img:'refs/forja.webp'},{id:'docas',nome:'Docas',img:'refs/docas.webp'},{id:'brasas',nome:'Brasas',img:'refs/perfis.webp',tr:'cartografa'}],
+ moldura:[{id:'simples',nome:'Simples'},{id:'espinho',nome:'Espinhos'},{id:'sino',nome:'Sino',tr:'mecenas'},{id:'fio',nome:'Fio vermelho',tr:'hornet'}],
+ titulo:[{id:'aprendiz',nome:'Aprendiz de agulha'},{id:'peregrina',nome:'Peregrina de Pharloom'},{id:'cartografa',nome:'Cartógrafa de Bone Bottom',tr:'cartografa'},{id:'coral',nome:'Voz de Bellhart',tr:'coral'}],
+ insignia:[{id:'nenhuma',nome:'Nenhuma'},{id:'agulha',nome:'Agulha rubra'},{id:'musgo',nome:'Broto'},{id:'rosario',nome:'Rosário'},{id:'carretel',nome:'Carretel de ouro'},{id:'sino',nome:'Sino de Bellhart',tr:'coral'},{id:'chave',nome:'Chave de mecânico',tr:'mecanico'}]
+};
+const perfil={capa:'musgo',moldura:'espinho',titulo:'peregrina',insignia:'agulha'};
+let aba='capa',nret=0;
+function retratoSVG(m){const id='rc'+(nret++);const O='#F3EEE8';let fr='';
+  if(m==='simples')fr=`<circle cx="56" cy="56" r="47" fill="none" stroke="${O}" stroke-width="2.5"/><circle cx="56" cy="56" r="51.5" fill="none" stroke="${O}" stroke-opacity=".3"/>`;
+  if(m==='espinho'){fr=`<circle cx="56" cy="56" r="47" fill="none" stroke="${O}" stroke-width="2.5"/>`;for(let i=0;i<16;i++){const a=i/16*Math.PI*2,l=i%2?7:12,c=Math.cos(a),s=Math.sin(a),px=-s*2.6,py=c*2.6;
+    fr+=`<path d="M${(56+c*46+px).toFixed(1)} ${(56+s*46+py).toFixed(1)}L${(56+c*(47+l)).toFixed(1)} ${(56+s*(47+l)).toFixed(1)}L${(56+c*46-px).toFixed(1)} ${(56+s*46-py).toFixed(1)}Z" fill="${O}"/>`}}
+  if(m==='sino')fr=`<circle cx="56" cy="56" r="47" fill="none" stroke="${O}" stroke-width="2.5"/><path d="M47 112 q0-14 9-14 q9 0 9 14z" fill="${O}"/><circle cx="56" cy="114" r="2.6" fill="${O}"/><path d="M40 104 q-14 4 -18 -8 q6 6 14 0 M72 104 q14 4 18 -8 q-6 6 -14 0" fill="none" stroke="${O}" stroke-width="2"/>`;
+  if(m==='fio')fr=`<circle cx="56" cy="56" r="47" fill="none" stroke="#C8323A" stroke-width="3.5"/><path d="M84 4 L112 30 L110 32 L82 7Z" fill="${O}"/><path d="M86 6 C 70 -4, 56 14, 66 18 C 76 22, 70 2, 50 6" fill="none" stroke="#C8323A" stroke-width="2"/>`;
+  return `<svg viewBox="-6 -6 124 128"><defs><clipPath id="${id}"><circle cx="56" cy="56" r="45"/></clipPath></defs><circle cx="56" cy="56" r="45" fill="#261A18"/>
+  <g clip-path="url(#${id})"><svg x="8" y="10" width="96" height="120" viewBox="6 -6 48 60">${avatarSVG(eu).replace(/^<svg[^>]*>|<\/svg>$/g,'')}</svg></g>${fr}</svg>`}
+function desenharCartao(){document.getElementById('capa-img').src=PECAS.capa.find(c=>c.id===perfil.capa).img;
+  document.getElementById('retrato').innerHTML=retratoSVG(perfil.moldura);
+  document.getElementById('p-titulo').textContent=PECAS.titulo.find(t=>t.id===perfil.titulo).nome;
+  document.getElementById('p-insig').innerHTML=perfil.insignia==='nenhuma'?'':insignia(perfil.insignia,PECAS.insignia.find(x=>x.id===perfil.insignia).nome)}
+function desenharPecas(){const L=PECAS[aba];document.getElementById('pecas').innerHTML=L.map(p=>{const tr=p.tr&&!feita(p.tr);
+  const sel=perfil[aba]===p.id;let vis='';
+  if(aba==='capa')vis=`<img src="${p.img}" alt="">`;if(aba==='moldura')vis=retratoSVG(p.id);if(aba==='insignia')vis=p.id==='nenhuma'?'<svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="18" fill="none" stroke="#BFB2AC" stroke-dasharray="3 4"/></svg>':insignia(p.id).replace('class="insig"','class="insig" style="width:54px;height:54px"');
+  const c=tr?CQ.find(c=>c.id===p.tr):null;
+  return `<button class="peca${tr?' trancada':''}" data-id="${p.id}" aria-pressed="${sel}" ${tr?'aria-disabled="true"':''}>${vis}<span>${p.nome}</span>${tr?`<small>${c.nome}</small><span class="cad">${ICS.cadeado}</span>`:''}</button>`}).join('')}
+chipsGrupo(document.getElementById('abas-perfil'),t=>{aba=t;desenharPecas()});
+document.getElementById('pecas').addEventListener('click',e=>{const b=e.target.closest('.peca');if(!b||b.classList.contains('trancada'))return;const id=b.dataset.id;
+  perfil[aba]=id;
+  desenharCartao();desenharPecas()});
+desenharConquistas();desenharOpcoes();desenharPecas();
+})();
+</script>

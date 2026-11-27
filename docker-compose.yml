@@ -1,0 +1,15 @@
+# Postgres para desenvolvimento. Sobe com: docker compose up -d
+services:
+  banco:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: pharloom
+      POSTGRES_USER: pharloom
+      POSTGRES_PASSWORD: pharloom
+    ports:
+      - '5432:5432'
+    volumes:
+      - pharloom-dados:/var/lib/postgresql/data
+
+volumes:
+  pharloom-dados:
