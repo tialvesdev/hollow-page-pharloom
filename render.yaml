@@ -1,0 +1,24 @@
+# Blueprint do Render: sobe a API (backend/) como serviço web gratuito em Docker.
+# O banco é o Postgres do Neon. Os valores marcados com sync: false são preenchidos no painel.
+services:
+  - type: web
+    name: pharloom-api
+    runtime: docker
+    plan: free
+    region: ohio
+    rootDir: backend
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /actuator/health
+    envVars:
+      - key: DB_URL
+        sync: false # jdbc:postgresql://<host-do-neon>/<banco>?sslmode=require
+      - key: DB_USUARIO
+        sync: false
+      - key: DB_SENHA
+        sync: false
+      - key: JWT_SEGREDO
+        generateValue: true
+      - key: COOKIE_SEGURO
+        value: 'true'
+      - key: CORS_ORIGENS
+        sync: false # endereço do site no Vercel
