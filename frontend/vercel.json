@@ -1,0 +1,7 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "rewrites": [
+    { "source": "/api/:caminho*", "destination": "https://pharloom-api.onrender.com/api/:caminho*" },
+    { "source": "/((?!api/).*)", "destination": "/index.html" }
+  ]
+}

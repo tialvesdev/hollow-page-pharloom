@@ -1,0 +1,19 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:pharloom;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DEFAULT_NULL_ORDERING=HIGH
+    username: sa
+    password:
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+
+pharloom:
+  jwt:
+    segredo: segredo-de-teste-com-mais-de-trinta-e-dois-caracteres
+    validade-dias: 30
+  cookie:
+    nome: pharloom_sessao
+    seguro: false
+  cors:
+    origens: http://localhost:5173
