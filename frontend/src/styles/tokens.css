@@ -1,0 +1,25 @@
+/* Tokens da Hollow Page Pharloom. Tirados dos prints de Silksong (ver docs/moodboard). */
+:root {
+  --breu: #0c0706; /* fundo */
+  --fuligem: #171010; /* superfícies */
+  --ferro: #261a18; /* superfície elevada */
+  --vinho: #4a2220; /* brilho de fundo, hover */
+  --carmim: #c8323a; /* alfinete, ativo, reação */
+  --carmim-claro: #e8636a; /* erro, carmim sobre breu */
+  --brasa: #e8873c;
+  --ambar: #f2aa57; /* foco, novidade */
+  --musgo: #376742;
+  --broto: #8cc06f; /* sucesso */
+  --osso: #f3eee8; /* ornamento e texto */
+  --nevoa: #bfb2ac; /* texto de apoio */
+  --linha: rgba(243, 238, 232, 0.18);
+
+  --f-titulo: 'Cinzel', 'Trajan Pro', Georgia, serif;
+  --f-lore: 'Cormorant Garamond', Garamond, Georgia, serif;
+  --f-ui: 'Alegreya Sans', system-ui, sans-serif;
+
+  --gutter: max(16px, env(safe-area-inset-left, 0px));
+  --largura: 1200px;
+
+  color-scheme: dark;
+}

@@ -1,0 +1,278 @@
+/* Componentes base: divisor, título com moldura, botões, links com seta, campos e molduras. */
+
+.divisor {
+  display: block;
+  width: min(420px, 100%);
+  height: 28px;
+  color: var(--osso);
+}
+
+/* Título entre duas molduras, como a entrada de área do jogo */
+.titulo-moldura {
+  display: grid;
+  justify-items: center;
+  text-align: center;
+}
+.titulo-moldura svg {
+  width: min(520px, 90vw);
+  height: auto;
+  color: var(--osso);
+}
+
+/* Botão retangular */
+.bt {
+  min-height: 46px;
+  padding: 0 22px;
+  border-radius: 0;
+  border: 1.5px solid var(--osso);
+  background: var(--osso);
+  color: var(--breu);
+  cursor: pointer;
+  font-family: var(--f-titulo);
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.1em;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-decoration: none;
+  box-shadow:
+    inset 0 0 0 3px var(--osso),
+    inset 0 0 0 4px var(--breu);
+  transition:
+    background 0.15s,
+    color 0.15s;
+}
+.bt:hover {
+  background: #fff;
+  color: var(--breu);
+}
+.bt:active {
+  transform: translateY(1px);
+}
+.bt--sec {
+  background: transparent;
+  color: var(--osso);
+  box-shadow:
+    inset 0 0 0 3px var(--breu),
+    inset 0 0 0 4px rgba(243, 238, 232, 0.3);
+}
+.bt--sec:hover {
+  background: rgba(243, 238, 232, 0.08);
+  color: var(--osso);
+}
+.bt--perigo {
+  background: transparent;
+  color: var(--carmim-claro);
+  border-color: var(--carmim-claro);
+  box-shadow: none;
+}
+.bt:disabled {
+  opacity: 0.45;
+  cursor: progress;
+}
+.bt--largo {
+  width: 100%;
+}
+
+/* Link com setas laterais que aparecem no hover */
+.link-seta {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 4px;
+  font-family: var(--f-titulo);
+  font-size: 18px;
+  letter-spacing: 0.08em;
+  color: var(--nevoa);
+  text-decoration: none;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+.link-seta svg {
+  width: 13px;
+  height: 24px;
+  color: var(--osso);
+  opacity: 0;
+  transition:
+    opacity 0.2s,
+    transform 0.2s;
+}
+.link-seta svg:last-child {
+  transform: scaleX(-1);
+}
+.link-seta:hover,
+.link-seta:focus-visible,
+.link-seta[aria-current='page'] {
+  color: var(--osso);
+}
+.link-seta:hover svg,
+.link-seta:focus-visible svg,
+.link-seta[aria-current='page'] svg {
+  opacity: 1;
+}
+
+/* Campo de texto com cantos de seleção no foco */
+.campo {
+  display: grid;
+  gap: 8px;
+}
+.campo__rotulo {
+  font-size: 13px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--nevoa);
+}
+.campo__caixa {
+  position: relative;
+}
+.campo__caixa input {
+  width: 100%;
+  min-height: 48px;
+  background: rgba(243, 238, 232, 0.04);
+  border: 0;
+  border-bottom: 1.5px solid var(--linha);
+  color: var(--osso);
+  font: inherit;
+  padding: 12px 16px;
+  border-radius: 2px 2px 0 0;
+  outline: none;
+}
+.campo__caixa input::placeholder {
+  color: #8f817b;
+}
+.campo__canto {
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  color: var(--osso);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 0.2s,
+    transform 0.2s;
+}
+.campo__canto--a {
+  top: -9px;
+  left: -9px;
+  transform: translate(4px, 4px);
+}
+.campo__canto--b {
+  bottom: -9px;
+  right: -9px;
+  transform: translate(-4px, -4px);
+}
+.campo__caixa:focus-within input {
+  border-bottom-color: var(--osso);
+  background: rgba(243, 238, 232, 0.07);
+}
+.campo__caixa:focus-within .campo__canto {
+  opacity: 1;
+  transform: none;
+}
+.campo--erro .campo__caixa input {
+  border-bottom-color: var(--carmim-claro);
+}
+.campo--erro .campo__canto {
+  opacity: 1;
+  transform: none;
+  color: var(--carmim-claro);
+}
+.campo__erro {
+  font-size: 15px;
+  color: var(--carmim-claro);
+}
+.campo__dica {
+  font-size: 14px;
+  color: var(--nevoa);
+}
+.campo__acao {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: 0;
+  color: var(--nevoa);
+  font-size: 14px;
+  cursor: pointer;
+  padding: 6px 10px;
+}
+.campo__acao:hover {
+  color: var(--osso);
+}
+
+/* Moldura grande: cantos vetorizados ligados por linha */
+.moldura {
+  position: relative;
+  padding: 34px 32px 30px;
+  background: rgba(12, 7, 6, 0.84);
+  backdrop-filter: blur(6px);
+}
+.moldura::before {
+  content: '';
+  position: absolute;
+  inset: 9px 9px 7px 9px;
+  border: 1.5px solid var(--osso);
+  opacity: 0.85;
+  pointer-events: none;
+}
+.moldura__canto {
+  position: absolute;
+  width: 92px;
+  height: 75px;
+  color: var(--osso);
+  pointer-events: none;
+}
+.moldura__canto--tl {
+  top: 0;
+  left: 0;
+}
+.moldura__canto--tr {
+  top: 0;
+  right: 0;
+}
+.moldura__canto--bl {
+  bottom: 0;
+  left: 0;
+}
+.moldura__canto--br {
+  bottom: 0;
+  right: 0;
+}
+
+/* Moldura simples: borda fina e duas volutas */
+.moldura-simples {
+  position: relative;
+  background: var(--fuligem);
+  border: 1px solid var(--linha);
+  padding: 26px;
+}
+.moldura-simples__canto {
+  position: absolute;
+  width: 44px;
+  height: 44px;
+  color: var(--osso);
+  pointer-events: none;
+}
+.moldura-simples__canto--a {
+  top: -7px;
+  left: -7px;
+}
+.moldura-simples__canto--b {
+  bottom: -7px;
+  right: -7px;
+  transform: scale(-1, -1);
+}
+
+/* Aviso de erro geral do formulário */
+.aviso-erro {
+  border-left: 2px solid var(--carmim-claro);
+  padding: 8px 12px;
+  background: rgba(200, 50, 58, 0.1);
+  color: var(--osso);
+  font-size: 15px;
+}
